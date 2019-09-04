@@ -9,7 +9,7 @@ public class LineItem {
 
     public LineItem(Product product) {
         this.product = product;
-        this.quantity = 2;
+        this.quantity = 1;
     }
 
     public int getQuantity() {
