@@ -45,10 +45,13 @@ public class ProductController extends HttpServlet {
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
 
         String idOfProduct = req.getParameter("product");
+        String productCategoryOfProduct = req.getParameter("product-category");
+        int intProductCategoryOfProduct = Integer.parseInt(productCategoryOfProduct);
+
         System.out.println(idOfProduct);
         int integerOfId = Integer.parseInt(idOfProduct);
 
-        for (Product product : productDataStore.getBy(productCategoryDataStore.find(1))) {
+        for (Product product : productDataStore.getBy(productCategoryDataStore.find(intProductCategoryOfProduct))) {
             if (product.getId() == integerOfId) {
                 cart.add(product);
 
