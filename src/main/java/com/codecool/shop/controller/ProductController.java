@@ -1,6 +1,5 @@
 package com.codecool.shop.controller;
 
-import com.codecool.shop.model.Product;
 import com.codecool.shop.order.Cart;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
@@ -41,22 +40,8 @@ public class ProductController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ProductDao productDataStore = ProductDaoMem.getInstance();
-        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
+        int productId = Integer.parseInt(req.getParameter("product"));
 
-        String idOfProduct = req.getParameter("product");
-        String productCategoryOfProduct = req.getParameter("product-category");
-        int intProductCategoryOfProduct = Integer.parseInt(productCategoryOfProduct);
-
-        System.out.println(idOfProduct);
-        int integerOfId = Integer.parseInt(idOfProduct);
-
-        for (Product product : productDataStore.getBy(productCategoryDataStore.find(intProductCategoryOfProduct))) {
-            if (product.getId() == integerOfId) {
-                cart.add(product);
-
-                System.out.println(product);
-            }
-        }
+        cart.add(ProductDaoMem.getInstance().find(productId));
     }
 }
