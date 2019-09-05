@@ -38,5 +38,4 @@ public class PaymentController extends HttpServlet {
         WebContext context = new WebContext(req, resp, req.getServletContext());
         engine.process("product/payment.html", context, resp.getWriter());
     }
-
 }
