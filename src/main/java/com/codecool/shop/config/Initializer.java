@@ -11,7 +11,7 @@ import com.codecool.shop.dao.implementation.SupplierDaoMem;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
-import com.codecool.shop.order.Cart;
+import com.codecool.shop.model.Cart;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;

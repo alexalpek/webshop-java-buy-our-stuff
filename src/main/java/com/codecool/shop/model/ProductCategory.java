@@ -3,7 +3,7 @@ package com.codecool.shop.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductCategory extends BaseModel {
+public class ProductCategory extends ProductModel {
     private String department;
     private List<Product> products;
 
