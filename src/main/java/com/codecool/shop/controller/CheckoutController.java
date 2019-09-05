@@ -21,9 +21,11 @@ public class CheckoutController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        CartDao cartDataStore = CartDaoMem.getInstance();
+
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
-        context.setVariable("cart", req.getParameter("cart"));
+        context.setVariable("cartSize", cartDataStore.find(1).size());
         engine.process("product/checkout.html", context, resp.getWriter());
     }
 
