@@ -66,7 +66,7 @@
     float: right;
 }
 
-#shopping-cart-image {
+#shopping-cart-image, #shopping-cart-image-no-link {
     height: 40px;
     width: 40px;
 }
@@ -77,4 +77,19 @@
 
 table {
     width: 100%;
+}
+
+#no-items-in-cart{
+    margin-bottom: 30px;
+    margin-top: 30px;
+    text-align: center;
+}
+
+h2, #sum-div {
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+
+#nav-tab {
+    margin-bottom: 30px;
 }

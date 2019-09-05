@@ -1,6 +1,4 @@
-package com.codecool.shop.order;
-
-import com.codecool.shop.model.Product;
+package com.codecool.shop.model;
 
 public class LineItem {
 
@@ -28,11 +26,10 @@ public class LineItem {
         return product;
     }
 
-    @Override
     public String toString() {
-        return "LineItem{" +
-                "product=" + product +
-                ", quantity=" + quantity +
-                "}";
+        return String.format("product: %1$s, " +
+                        "id: %2$d",
+                this.product,
+                this.quantity);
     }
 }

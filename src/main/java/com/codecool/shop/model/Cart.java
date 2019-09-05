@@ -1,6 +1,4 @@
-package com.codecool.shop.order;
-
-import com.codecool.shop.model.Product;
+package com.codecool.shop.model;
 
 import java.util.Currency;
 import java.util.Set;
@@ -9,22 +7,13 @@ import java.util.Optional;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-public class Cart {
+public class Cart extends BaseModel {
 
-    private int id;
-    private final Currency currency;
     private Set<LineItem> items = new HashSet<>();
+    private final Currency currency;
 
     public Cart(String currencyString) {
         this.currency = Currency.getInstance(currencyString);
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public Currency getCurrency() {
@@ -74,12 +63,11 @@ public class Cart {
         return items.stream().mapToInt(LineItem::getQuantity).sum();
     }
 
-    @Override
     public String toString() {
-        return "Cart{" +
-                "id=" + id +
-                ", currency=" + currency +
-                ", items=" + items +
-                '}';
+        return String.format(
+                "items: %1$s, " +
+                        "currency: %2$s",
+                this.items,
+                this.currency);
     }
 }

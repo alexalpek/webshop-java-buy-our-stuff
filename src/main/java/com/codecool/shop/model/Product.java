@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Currency;
 
-public class Product extends BaseModel {
+public class Product extends ProductModel {
 
     private BigDecimal defaultPrice;
     private Currency defaultCurrency;
@@ -68,18 +68,16 @@ public class Product extends BaseModel {
 
     @Override
     public String toString() {
-        return String.format("%1s" +
-                        "{id: %2$d, " +
-                        "name: %3$s, " +
-                        "defaultPrice: %4$f, " +
-                        "defaultCurrency: %5$s, " +
-                        "productCategory: %6$s, " +
+        return String.format("{id: %1$d, " +
+                        "name: %2$s, " +
+                        "defaultPrice: %3$s, " +
+                        "defaultCurrency: %4$s, " +
+                        "productCategory: %5$s, " +
                         "supplier: %6$s}",
-                this.getClass().getSimpleName(),
                 this.id,
                 this.name,
-                this.defaultPrice,
-                this.defaultCurrency.toString(),
+                this.getPrice(),
+                this.defaultCurrency,
                 this.productCategory.getName(),
                 this.supplier.getName());
     }
