@@ -3,6 +3,7 @@ package com.codecool.shop.controller;
 import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.CartDao;
 import com.codecool.shop.dao.implementation.CartDaoMem;
+import com.codecool.shop.model.ShippingInfo;
 import com.codecool.shop.order.Cart;
 import com.codecool.shop.order.Order;
 import org.thymeleaf.TemplateEngine;
@@ -31,27 +32,17 @@ public class CheckoutController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<String> orderInfo = new ArrayList<>();
+        String name = req.getParameter("name");
+        String email = req.getParameter("email");
+        String phoneNumber = req.getParameter("phone-number");
+        String billingAddress = req.getParameter("billing-address");
+        String shippingAddress = req.getParameter("shipping-address");
 
-        Enumeration<String> params = req.getParameterNames();
-        while(params.hasMoreElements()) {
-            String paramName = params.nextElement();
-            if (!paramName.equals("cart")) {
-                orderInfo.add(req.getParameter(paramName));
-            }
-        }
-
-        for (String info : orderInfo) {
-            if (info.equals("")) {
-                doGet(req, resp);
-                return;
-            }
-        }
-
+        ShippingInfo shippingInfo = new ShippingInfo(name, email, phoneNumber, billingAddress, shippingAddress);
         CartDao cartDataStore = CartDaoMem.getInstance();
         int cartId = Integer.parseInt(req.getParameter("cart"));
         Cart cart = cartDataStore.find(cartId);
 
-        Order order = new Order(cart, orderInfo);
+        Order order = new Order(cart, shippingInfo);
     }
 }
