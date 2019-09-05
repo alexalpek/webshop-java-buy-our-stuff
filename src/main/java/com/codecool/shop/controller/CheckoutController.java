@@ -35,5 +35,7 @@ public class CheckoutController extends HttpServlet {
             String paramName = params.nextElement();
             orderInfo.add(req.getParameter(paramName));
         }
+
+        Order order = new Order(new Cart(), orderInfo);
     }
 }
