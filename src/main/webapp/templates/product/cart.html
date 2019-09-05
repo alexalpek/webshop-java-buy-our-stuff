@@ -38,7 +38,7 @@
 
 <div class="container">
     <h2>Shopping Cart</h2>
-    <ul class="nav nav-tabs">
+    <ul id="nav-tab" class="nav nav-tabs">
         <li class="nav-item">
             <a class="nav-link" href="/">Shop</a>
         </li>
@@ -46,26 +46,34 @@
             <a class="nav-link active disabled" href="/cart">Cart</a>
         </li>
     </ul>
-    <table>
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Quantity</th>
-                <th>Unit price</th>
-                <th>Total price</th>
-            </tr>
-        </thead>
-        <tbody class="table table-bordered" th:each="item : ${cart.items}">
-            <tr th:with="price=${item.product.getDefaultPrice(2)}">
-                <td th:text="${item.product.name}">Name</td>
-                <td th:text="${item.quantity}">Quantity</td>
-                <td th:text="${price} + ${item.product.defaultCurrency.symbol}">Unit price</td>
-                <td th:text="${price} * ${item.quantity} + ${item.product.defaultCurrency.symbol}">Total price</td>
-            </tr>
-        </tbody>
-    </table>
-    <div>
-        <h5 th:text="'Total price: ' + ${cart.getTotalPrice(2)} + ${cart.currency.symbol}">Total price</h5>
+    <div th:switch="${cart.size()}">
+        <div id="no-items-in-cart" th:case="'0'">
+            <h6>No items added into the cart. Yet.</h6>
+        </div>
+        <div th:case="*">
+            <table>
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Quantity</th>
+                    <th>Unit price</th>
+                    <th>Total price</th>
+                </tr>
+                </thead>
+                <tbody class="table table-bordered" th:each="item : ${cart.items}">
+                <tr th:with="price=${item.product.getDefaultPrice(2)}">
+                    <td th:text="${item.product.name}">Name</td>
+                    <td th:text="${item.quantity}">Quantity</td>
+                    <td th:text="${price} + ${item.product.defaultCurrency.symbol}">Unit price</td>
+                    <td th:text="${price} * ${item.quantity} + ${item.product.defaultCurrency.symbol}">Total price</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <div id="sum-div">
+                <h5 th:text="'Total price: ' + ${cart.getTotalPrice(2)} + ${cart.currency.symbol}">Total price</h5>
+            </div>
+        </div>
     </div>
 </div>
 
