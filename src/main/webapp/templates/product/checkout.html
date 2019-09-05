@@ -38,7 +38,7 @@
 
 <div class="container">
     <h2>Shipping information</h2>
-    <div th:switch="${cartSize}">
+    <div th:switch="${cart.size()}">
         <div id="no-items-in-cart" th:case="'0'">
             <h6>No items added into the cart. Yet.</h6>
         </div>
@@ -64,6 +64,7 @@
                     <label for="shipping-address">Shopping address</label>
                     <input class="form-control" id="shipping-address" name="shipping-address" placeholder="Shipping address" required>
                 </div>
+                <input type="hidden" name="cart" th:value="${cart.id}">
                 <input class="btn btn-success" type="submit" value="Checkout">
             </form>
         </div>
