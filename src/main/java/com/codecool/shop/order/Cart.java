@@ -38,4 +38,12 @@ public class Cart {
                 item -> item.getProduct().getDefaultPrice() * item.getQuantity()
         ).sum();
     }
+
+    public String getSizeOfCart(){
+        int sum = 0;
+        for (LineItem item : items){
+            sum += item.getQuantity();
+        }
+        return Integer.toString(sum);
+    }
 }
