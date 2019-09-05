@@ -3,7 +3,7 @@ package com.codecool.shop.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductCategory extends BaseModel {
+public class ProductCategory extends ProductModel {
     private String department;
     private List<Product> products;
 
@@ -34,11 +34,12 @@ public class ProductCategory extends BaseModel {
     }
 
     public String toString() {
-        return String.format(
-                "id: %1$d," +
-                        "name: %2$s, " +
-                        "department: %3$s, " +
-                        "description: %4$s",
+        return String.format("%1$s={" +
+                        "id: %2$d, " +
+                        "name: %3$s, " +
+                        "department: %4$s, " +
+                        "description: %5$s}",
+                this.getClass().getSimpleName(),
                 this.id,
                 this.name,
                 this.department,

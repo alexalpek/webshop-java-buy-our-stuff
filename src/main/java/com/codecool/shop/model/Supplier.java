@@ -3,11 +3,11 @@ package com.codecool.shop.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Supplier extends BaseModel {
+public class Supplier extends ProductModel {
     private List<Product> products;
 
     public Supplier(String name, String description) {
-        super(name);
+        super(name, description);
         this.products = new ArrayList<>();
     }
 
@@ -24,9 +24,11 @@ public class Supplier extends BaseModel {
     }
 
     public String toString() {
-        return String.format("id: %1$d, " +
-                        "name: %2$s, " +
-                        "description: %3$s",
+        return String.format("%1$s={" +
+                        "id: %2$d, " +
+                        "name: %3$s, " +
+                        "description: %4$s}",
+                this.getClass().getSimpleName(),
                 this.id,
                 this.name,
                 this.description
