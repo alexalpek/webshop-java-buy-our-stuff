@@ -39,6 +39,14 @@ public class Cart {
         ).sum();
     }
 
+    public String getSizeOfCart(){
+        int sum = 0;
+        for (LineItem item : items){
+            sum += item.getQuantity();
+        }
+        return Integer.toString(sum);
+    }
+
     @Override
     public String toString() {
         return "Cart{" +
