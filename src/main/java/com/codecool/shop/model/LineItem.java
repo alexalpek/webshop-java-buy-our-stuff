@@ -27,9 +27,11 @@ public class LineItem {
     }
 
     public String toString() {
-        return String.format("product: %1$s, " +
-                        "id: %2$d",
-                this.product,
-                this.quantity);
+        return String.format("%1$s={" +
+                        "quantity: %2$d, " +
+                        "product: %3$s}",
+                this.getClass().getSimpleName(),
+                this.quantity,
+                this.product);
     }
 }

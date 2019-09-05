@@ -55,4 +55,20 @@ public class ShippingInfo {
     public void setShippingAddress(String shippingAddress) {
         this.shippingAddress = shippingAddress;
     }
+
+    public String toString() {
+        return String.format("%1$s={" +
+                        "name: %2$s, " +
+                        "email: %3$s, " +
+                        "phoneNumber: %4$s, " +
+                        "billingAddress: %5$s, " +
+                        "shippingAddress: %6$s}",
+                this.getClass().getSimpleName(),
+                this.name,
+                this.email,
+                this.phoneNumber,
+                this.billingAddress,
+                this.shippingAddress
+        );
+    }
 }

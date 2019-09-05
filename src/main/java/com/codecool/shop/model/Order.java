@@ -1,10 +1,5 @@
 package com.codecool.shop.model;
 
-
-import com.codecool.shop.model.ShippingInfo;
-
-import java.util.List;
-
 public class Order {
 
     private Cart cart;
@@ -13,5 +8,15 @@ public class Order {
     public Order(Cart cart, ShippingInfo shippingInfo) {
         this.cart = cart;
         this.shippingInfo = shippingInfo;
+    }
+
+    public String toString() {
+        return String.format("%1$s={" +
+                        "shippingInfo: %2$s, " +
+                        "cart: %3$s}",
+                this.getClass().getSimpleName(),
+                this.shippingInfo,
+                this.cart
+        );
     }
 }
