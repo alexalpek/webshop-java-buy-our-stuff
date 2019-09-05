@@ -8,6 +8,7 @@ import java.util.Optional;
 
 public class Cart {
 
+    private int id;
     private Set<LineItem> items = new HashSet<>();
 
     public void add(Product product) {
@@ -39,9 +40,9 @@ public class Cart {
         ).sum();
     }
 
-    public String getSizeOfCart(){
+    public String getSizeOfCart() {
         int sum = 0;
-        for (LineItem item : items){
+        for (LineItem item : items) {
             sum += item.getQuantity();
         }
         return Integer.toString(sum);
@@ -51,6 +52,14 @@ public class Cart {
     public String toString() {
         return "Cart{" +
                 "items=" + items +
-                '}';
+                "}";
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
     }
 }

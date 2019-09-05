@@ -37,20 +37,17 @@
 </div>
 
 <div class="container">
+    <div id="shopping-cart-amount">
+        <div th:text="${cartSize}"> 0 </div>
+        <img id="shopping-cart-image" class="" src="http://placehold.it/40x40/000/fff"
+             th:attr="src='/static/img/cart.png'" alt=""/>
+    </div>
     <ul class="nav nav-tabs">
         <li class="nav-item">
             <a class="nav-link active" href="/">Shop</a>
         </li>
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Dropdown</a>
-            <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">Link 1</a>
-                <a class="dropdown-item" href="#">Link 2</a>
-                <a class="dropdown-item" href="#">Link 3</a>
-            </div>
-        </li>
         <li class="nav-item">
-            <a class="nav-link" href="/cart" th:text="${cartSize} + ' Cart'">0 Cart</a>
+            <a class="nav-link" href="/cart">Cart</a>
         </li>
     </ul>
     <div class="card">
