@@ -2,7 +2,7 @@ package com.codecool.shop.controller;
 
 import com.codecool.shop.dao.CartDao;
 import com.codecool.shop.dao.implementation.CartDaoMem;
-import com.codecool.shop.order.Cart;
+import com.codecool.shop.model.Cart;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
@@ -31,7 +31,7 @@ public class ProductController extends HttpServlet {
         WebContext context = new WebContext(req, resp, req.getServletContext());
         context.setVariable("category", productCategoryDataStore.find(1));
         context.setVariable("products", productDataStore.getBy(productCategoryDataStore.find(1)));
-        context.setVariable("cartSize", cartDataStore.find(1).getSizeOfCart());
+        context.setVariable("cartSize", cartDataStore.find(1).size());
         // // Alternative setting of the template context
         // Map<String, Object> params = new HashMap<>();
         // params.put("category", productCategoryDataStore.find(1));

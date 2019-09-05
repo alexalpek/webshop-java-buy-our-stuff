@@ -1,4 +1,4 @@
-package com.codecool.shop.order;
+package com.codecool.shop.model;
 
 public class Order {
 

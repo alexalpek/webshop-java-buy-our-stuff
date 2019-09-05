@@ -1,7 +1,6 @@
 package com.codecool.shop.dao;
 
-import com.codecool.shop.model.ProductCategory;
-import com.codecool.shop.order.Cart;
+import com.codecool.shop.model.Cart;
 
 import java.util.List;
 
