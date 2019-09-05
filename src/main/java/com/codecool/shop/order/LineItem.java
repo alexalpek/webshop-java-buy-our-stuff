@@ -27,4 +27,12 @@ public class LineItem {
     public Product getProduct() {
         return product;
     }
+
+    @Override
+    public String toString() {
+        return "LineItem{" +
+                "product=" + product +
+                ", quantity=" + quantity +
+                "}";
+    }
 }

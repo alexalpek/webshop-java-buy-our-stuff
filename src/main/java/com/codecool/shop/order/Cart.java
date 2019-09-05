@@ -38,4 +38,11 @@ public class Cart {
                 item -> item.getProduct().getDefaultPrice() * item.getQuantity()
         ).sum();
     }
+
+    @Override
+    public String toString() {
+        return "Cart{" +
+                "items=" + items +
+                '}';
+    }
 }
