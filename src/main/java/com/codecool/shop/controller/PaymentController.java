@@ -38,4 +38,12 @@ public class PaymentController extends HttpServlet {
         WebContext context = new WebContext(req, resp, req.getServletContext());
         engine.process("product/payment.html", context, resp.getWriter());
     }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
+        WebContext context = new WebContext(req, resp, req.getServletContext());
+        engine.process("product/payment.html", context, resp.getWriter());
+    }
 }
+
