@@ -22,7 +22,12 @@ public class CheckoutController extends HttpServlet {
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
+        //TODO change hardcoded ID
         context.setVariable("cart", cartDataStore.find(1));
-        engine.process("product/checkout.html", context, resp.getWriter());
+        if (cartDataStore.find(1).size() > 0) {
+            engine.process("product/checkout.html", context, resp.getWriter());
+        } else {
+            engine.process("product/cart.html", context, resp.getWriter());
+        }
     }
 }

@@ -97,3 +97,8 @@ h2, #sum-div {
 .footer {
     margin-top: 80px;
 }
+
+#link-back-to-main-page:link, #link-back-to-main-page:visited, #link-back-to-main-page:hover, #link-back-to-main-page:active {
+    text-decoration: none;
+    color: #000000;
+}
