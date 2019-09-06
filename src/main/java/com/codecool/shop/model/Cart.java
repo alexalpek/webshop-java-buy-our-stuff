@@ -64,10 +64,14 @@ public class Cart extends BaseModel {
     }
 
     public String toString() {
-        return String.format(
-                "items: %1$s, " +
-                        "currency: %2$s",
-                this.items,
-                this.currency);
+        return String.format("%1$s={" +
+                        "id: %2$d, " +
+                        "currency: %3$s, " +
+                        "items: %4$s}",
+                this.getClass().getSimpleName(),
+                this.id,
+                this.currency,
+                this.items
+        );
     }
 }
