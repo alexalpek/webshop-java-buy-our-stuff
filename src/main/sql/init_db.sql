@@ -139,7 +139,7 @@ VALUES (1, 'Barna', 'a');
 SELECT pg_catalog.setval('account_id_seq', 1, true);
 
 INSERT INTO shipping_info
-VALUES (1,1,'Matrai Barnabas', 'asd@gmail.com', '0630-123-4567', 'semmi', 'semmi')
+VALUES (1,1,'Matrai Barnabas', 'asd@gmail.com', '0630-123-4567', 'semmi', 'semmi');
 SELECT pg_catalog.setval('shipping_info_id_seq', 1, true);
 
 INSERT INTO cart
