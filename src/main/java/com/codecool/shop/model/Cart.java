@@ -10,10 +10,12 @@ import java.math.RoundingMode;
 public class Cart extends BaseModel {
 
     private Set<LineItem> items = new HashSet<>();
+    private final int accountId;
     private final Currency currency;
 
-    public Cart(String currencyString) {
+    public Cart(String currencyString, int accountId) {
         this.currency = Currency.getInstance(currencyString);
+        this.accountId = accountId;
     }
 
     public Currency getCurrency() {
