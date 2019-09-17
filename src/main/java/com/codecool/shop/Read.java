@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Read {
+public class ConfigFileReader {
 
-    public Read() {
+    public ConfigFileReader() {
         try {
             readDataFromFile("connection.properties");
         }
@@ -20,14 +20,14 @@ public class Read {
     }
 
     public static void main(String[] args) throws Exception{
-        Read read = new Read();
+        ConfigFileReader read = new ConfigFileReader();
     }
 
     public List<String> readDataFromFile(String filename) throws ClassNotFoundException{
 
         StringBuilder sb = new StringBuilder();
 
-        ClassLoader cl = Class.forName("com.codecool.shop.Read").getClassLoader();
+        ClassLoader cl = Class.forName("com.codecool.shop.ConfigFileReader").getClassLoader();
         URL url = cl.getResource(filename);
         String file;
 
