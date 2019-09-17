@@ -1,7 +1,5 @@
 package com.codecool.shop.dao.implementation.jdbc;
 
-import lombok.Cleanup;
-
 import java.sql.*;
 
 public abstract class DaoJDBC {

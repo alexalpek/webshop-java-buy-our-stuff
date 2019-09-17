@@ -2,12 +2,9 @@ package com.codecool.shop.controller;
 
 import com.codecool.shop.dao.CartDao;
 import com.codecool.shop.dao.DaoController;
-import com.codecool.shop.dao.implementation.mem.CartDaoMem;
 import com.codecool.shop.model.Cart;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
-import com.codecool.shop.dao.implementation.mem.ProductCategoryDaoMem;
-import com.codecool.shop.dao.implementation.mem.ProductDaoMem;
 import com.codecool.shop.config.TemplateEngineUtil;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
@@ -48,10 +45,8 @@ public class ProductController extends HttpServlet {
 
         int productId = Integer.parseInt(req.getParameter("product"));
         Cart cart = cartDataStore.find(1);
-        System.out.println(cart.getId());
 
         cart.add(productDataStore.find(productId));
-        System.out.println(productId);
         doGet(req, resp);
     }
 }
