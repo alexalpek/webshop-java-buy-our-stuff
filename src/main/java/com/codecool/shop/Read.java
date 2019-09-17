@@ -28,13 +28,13 @@ public class Read {
         StringBuilder sb = new StringBuilder();
 
         ClassLoader cl = Class.forName("com.codecool.shop.Read").getClassLoader();
-        URL url = cl.getResource("connection.properties");
+        URL url = cl.getResource(filename);
         String file;
 
-        if (url.getFile() != null) {
+        if (url != null) {
             file = url.getFile();
         } else {
-            return new ArrayList<String>();
+            return null;
         }
 
         try (FileReader reader = new FileReader(file);
