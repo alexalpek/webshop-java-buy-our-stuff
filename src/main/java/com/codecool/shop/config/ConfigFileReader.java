@@ -1,4 +1,4 @@
-package com.codecool.shop;
+package com.codecool.shop.config;
 
 import java.io.*;
 import java.net.URL;
@@ -19,7 +19,7 @@ public class ConfigFileReader {
         }
     }
 
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) {
         ConfigFileReader read = new ConfigFileReader();
     }
 
@@ -27,7 +27,7 @@ public class ConfigFileReader {
 
         StringBuilder sb = new StringBuilder();
 
-        ClassLoader cl = Class.forName("com.codecool.shop.ConfigFileReader").getClassLoader();
+        ClassLoader cl = Class.forName("com.codecool.shop.config.ConfigFileReader").getClassLoader();
         URL url = cl.getResource(filename);
         String file;
 
