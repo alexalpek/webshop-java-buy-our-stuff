@@ -30,7 +30,7 @@ public class ProductDaoJDBC extends DaoJDBC implements ProductDao {
             stmt.setInt(2, product.getSupplier().getId());
             stmt.setInt(3, product.getProductCategory().getId());
             stmt.setBigDecimal(4, product.getDefaultPrice());
-            stmt.setString(5, product.getDefaultCurrency().getDisplayName());
+            stmt.setString(5, product.getDefaultCurrency().getCurrencyCode());
             stmt.setString(6, product.getDescription());
             @Cleanup ResultSet rs = stmt.executeQuery();
             if (rs.next()) {

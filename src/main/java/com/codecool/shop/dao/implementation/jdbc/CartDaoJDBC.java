@@ -21,7 +21,7 @@ public class CartDaoJDBC extends DaoJDBC implements CartDao {
             @Cleanup PreparedStatement stmt = conn.prepareStatement(query);
 
             stmt.setInt(1, userId);
-            stmt.setString(2, cart.getCurrency().getDisplayName());
+            stmt.setString(2, cart.getCurrency().getCurrencyCode());
             @Cleanup ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 int id = rs.getInt("id");

@@ -2,6 +2,7 @@ package com.codecool.shop.controller;
 
 import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.CartDao;
+import com.codecool.shop.dao.DaoController;
 import com.codecool.shop.dao.implementation.mem.CartDaoMem;
 import com.codecool.shop.model.Cart;
 import com.codecool.shop.model.Order;
@@ -36,7 +37,7 @@ public class CheckoutController extends HttpServlet {
         String shippingAddress = req.getParameter("shipping-address");
 
         ShippingInfo shippingInfo = new ShippingInfo(name, email, phoneNumber, billingAddress, shippingAddress);
-        CartDao cartDataStore = CartDaoMem.getInstance();
+        CartDao cartDataStore = DaoController.getCartDao();
         int cartId = Integer.parseInt(req.getParameter("cart"));
         Cart cart = cartDataStore.find(cartId);
 
