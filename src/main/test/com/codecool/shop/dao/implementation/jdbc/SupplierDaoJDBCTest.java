@@ -3,13 +3,10 @@ package com.codecool.shop.dao.implementation.jdbc;
 import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.model.Supplier;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-class SupplierDaoJDBCTest {
+class SupplierDaoJDBCTest extends DaoJDBCTest {
 
     @Test
     @DisplayName("Test add() method")

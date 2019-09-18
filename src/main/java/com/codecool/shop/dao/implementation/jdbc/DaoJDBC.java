@@ -1,7 +1,6 @@
 package com.codecool.shop.dao.implementation.jdbc;
 
-import com.codecool.shop.config.ConfigFileReader;
-import lombok.Cleanup;
+import com.codecool.shop.config.DatabaseHandler;
 
 import java.sql.*;
 import java.util.Map;
@@ -13,10 +12,11 @@ public abstract class DaoJDBC {
     private static final String PASSWORD;
 
     static {
-        ConfigFileReader cfr = new ConfigFileReader();
+        DatabaseHandler cfr = new DatabaseHandler();
+        String fileName = "sql/credentials/production_db.properties";
 
         try {
-            Map<String, String> databaseData = cfr.readDataFromFile("connection.properties");
+            Map<String, String> databaseData = cfr.getDatabaseCredentials(fileName);
             USERNAME = databaseData.get("user");
             DATABASE = databaseData.get("url") + "/" + databaseData.get("database");
             PASSWORD = databaseData.get("password");
