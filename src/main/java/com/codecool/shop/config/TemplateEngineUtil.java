@@ -19,5 +19,4 @@ public class TemplateEngineUtil {
     public static TemplateEngine getTemplateEngine(ServletContext context) {
         return (TemplateEngine) context.getAttribute(TEMPLATE_ENGINE_ATTR);
     }
-
 }
