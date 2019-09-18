@@ -24,9 +24,11 @@ public class Supplier extends ProductModel {
     }
 
     public String toString() {
-        return String.format("id: %1$d, " +
-                        "name: %2$s, " +
-                        "description: %3$s",
+        return String.format("%1$s={" +
+                        "id: %2$d, " +
+                        "name: %3$s, " +
+                        "description: %4$s}",
+                this.getClass().getSimpleName(),
                 this.id,
                 this.name,
                 this.description
