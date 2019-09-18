@@ -10,9 +10,10 @@ public class DaoController {
     private static final SupplierDao SUPPLIER_DAO;
     private static final CartDao CART_DAO;
     private static final LineItemDao LINE_ITEM_DAO;
+    private static final boolean JDBC;
 
     static {
-        boolean JDBC = true; // TODO: change hardcoded value
+        JDBC = true; // TODO: change hardcoded value
 
         if (JDBC) {
             PRODUCT_DAO = new ProductDaoJDBC();
@@ -50,5 +51,9 @@ public class DaoController {
 
     public static LineItemDao getLineItemDao() {
         return LINE_ITEM_DAO;
+    }
+
+    public static boolean isJdbc(){
+        return JDBC;
     }
 }
