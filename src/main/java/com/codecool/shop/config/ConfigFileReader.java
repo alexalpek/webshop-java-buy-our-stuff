@@ -1,24 +1,12 @@
 package com.codecool.shop.config;
 
 import java.io.*;
+import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
 public class ConfigFileReader {
-
-    public ConfigFileReader() {
-        try {
-            readDataFromFile("connection.properties");
-        }
-        catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void main(String[] args) {
-        ConfigFileReader cfr = new ConfigFileReader();
-    }
 
     public Map<String, String> readDataFromFile(String filename) throws ClassNotFoundException{
 
@@ -31,7 +19,7 @@ public class ConfigFileReader {
             Properties prop = new Properties();
 
             if (input != null) {
-                prop.load(input);
+                prop.load(new InputStreamReader(input, Charset.forName("UTF-8")));
             }
 
             databaseData.put("url", prop.getProperty("url"));

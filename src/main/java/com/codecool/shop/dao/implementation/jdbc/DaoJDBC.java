@@ -14,23 +14,15 @@ public abstract class DaoJDBC {
 
     static {
         ConfigFileReader cfr = new ConfigFileReader();
-        Map<String, String> databaseData = null;
 
         try {
-            databaseData = cfr.readDataFromFile("connection.properties");
+            Map<String, String> databaseData = cfr.readDataFromFile("connection.properties");
+            USERNAME = databaseData.get("user");
+            DATABASE = databaseData.get("url") + "/" + databaseData.get("database");
+            PASSWORD = databaseData.get("password");
         }
         catch (ClassNotFoundException e){
-            e.printStackTrace();
-        }
-
-        if (databaseData != null) {
-            USERNAME = databaseData.get("user");
-            DATABASE = databaseData.get("url") + databaseData.get("database");
-            PASSWORD = databaseData.get("password");
-        } else {
-            USERNAME = System.getenv("username");
-            DATABASE = System.getenv("database");
-            PASSWORD = System.getenv("password");
+            throw new RuntimeException("Class not found");
         }
     }
 
