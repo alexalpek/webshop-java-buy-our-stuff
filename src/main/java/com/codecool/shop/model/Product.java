@@ -68,12 +68,14 @@ public class Product extends ProductModel {
 
     @Override
     public String toString() {
-        return String.format("{id: %1$d, " +
-                        "name: %2$s, " +
-                        "defaultPrice: %3$s, " +
-                        "defaultCurrency: %4$s, " +
-                        "productCategory: %5$s, " +
-                        "supplier: %6$s}",
+        return String.format("%1$s={" +
+                        "id: %2$d, " +
+                        "name: %3$s, " +
+                        "defaultPrice: %4$s, " +
+                        "defaultCurrency: %5$s, " +
+                        "productCategory: %6$s, " +
+                        "supplier: %7$s}",
+                this.getClass().getSimpleName(),
                 this.id,
                 this.name,
                 this.getPrice(),

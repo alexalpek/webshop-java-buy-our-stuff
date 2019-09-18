@@ -40,6 +40,14 @@ public class CheckoutController extends HttpServlet {
         int cartId = Integer.parseInt(req.getParameter("cart"));
         Cart cart = cartDataStore.find(cartId);
 
-        Order order = new Order(cart, shippingInfo);
+        TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
+        WebContext context = new WebContext(req, resp, req.getServletContext());
+        //TODO change hardcoded ID
+        context.setVariable("cart", cartDataStore.find(1));
+        if (cartDataStore.find(1).size() > 0) {
+            engine.process("product/checkout.html", context, resp.getWriter());
+        } else {
+            engine.process("product/cart.html", context, resp.getWriter());
+        }
     }
 }
