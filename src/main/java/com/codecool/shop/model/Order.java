@@ -1,10 +1,5 @@
 package com.codecool.shop.model;
 
-
-import com.codecool.shop.model.ShippingInfo;
-
-import java.util.List;
-
 public class Order {
 
     private Cart cart;

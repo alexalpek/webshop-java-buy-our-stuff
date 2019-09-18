@@ -4,26 +4,28 @@ public class LineItem {
 
     private Product product;
     private int quantity;
+    private int cartId;
 
-    public LineItem(Product product) {
+    public LineItem(Product product, int quantity, Cart cart) {
         this.product = product;
-        this.quantity = 1;
+        this.quantity = quantity;
+        this.cartId = cart.getId();
     }
 
     public int getQuantity() {
         return quantity;
     }
 
-    public void increaseQuantity() {
-        quantity++;
-    }
-
-    public void decreaseQuantity() {
-        quantity--;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public Product getProduct() {
         return product;
+    }
+
+    public int getCartId() {
+        return cartId;
     }
 
     public String toString() {

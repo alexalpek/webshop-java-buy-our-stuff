@@ -1,13 +1,6 @@
 package com.codecool.shop.config;
 
-import com.codecool.shop.dao.CartDao;
-import com.codecool.shop.dao.ProductCategoryDao;
-import com.codecool.shop.dao.ProductDao;
-import com.codecool.shop.dao.SupplierDao;
-import com.codecool.shop.dao.implementation.mem.CartDaoMem;
-import com.codecool.shop.dao.implementation.mem.ProductCategoryDaoMem;
-import com.codecool.shop.dao.implementation.mem.ProductDaoMem;
-import com.codecool.shop.dao.implementation.mem.SupplierDaoMem;
+import com.codecool.shop.dao.*;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
@@ -23,13 +16,13 @@ public class Initializer implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-        ProductDao productDataStore = ProductDaoMem.getInstance();
-        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
-        SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
-        CartDao cartDataStore = CartDaoMem.getInstance();
+        ProductDao productDataStore = DaoController.getProductDao();
+        ProductCategoryDao productCategoryDataStore = DaoController.getProductCategoryDao();
+        SupplierDao supplierDataStore = DaoController.getSupplierDao();
+        CartDao cartDataStore = DaoController.getCartDao();
 
         //setting up a new cart
-        Cart cart = new Cart("USD");
+        Cart cart = new Cart("USD", 1); //TODO
         cartDataStore.add(cart);
 
         //setting up a new supplier
