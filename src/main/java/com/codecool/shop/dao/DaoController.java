@@ -13,7 +13,7 @@ public class DaoController {
     private static final boolean JDBC;
 
     static {
-        JDBC = true; // TODO: change hardcoded value
+        JDBC = true; // TODO: change hardcoded value.
 
         if (JDBC) {
             PRODUCT_DAO = new ProductDaoJDBC();
