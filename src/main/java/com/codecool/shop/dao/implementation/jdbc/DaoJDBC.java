@@ -12,10 +12,8 @@ public abstract class DaoJDBC {
     private static String PASSWORD;
 
     static {
-        String fileName = DatabaseHelper.getCredentialsFileName();
-
         try {
-            Map<String, String> credentials = DatabaseHelper.getCredentials(fileName);
+            Map<String, String> credentials = DatabaseHelper.getCredentials();
             USERNAME = credentials.get("user");
             DATABASE = credentials.get("url") + "/" + credentials.get("database");
             PASSWORD = credentials.get("password");

@@ -12,32 +12,23 @@ public class DatabaseHelper {
 
     public static void initDatabase() {
         String sqlFileName = "sql/sample_data.sql";
-        String credentialsFileName = getCredentialsFileName();
 
-        executeSqlFile(sqlFileName, credentialsFileName);
+        executeSqlFile(sqlFileName);
     }
 
     public static void clearDatabase() {
         String sqlFileName = "sql/init_db.sql";
-        String credentialsFileName = getCredentialsFileName();
 
-        executeSqlFile(sqlFileName, credentialsFileName);
+        executeSqlFile(sqlFileName);
     }
 
-    public static String getCredentialsFileName() {
-        if (Util.isJUnitTest()) {
-            return "sql/credentials/test_db.properties";
-        } else {
-            return "sql/credentials/production_db.properties";
-        }
-    }
-
-    public static Map<String, String> getCredentials(String filename) throws ClassNotFoundException {
+    public static Map<String, String> getCredentials() throws ClassNotFoundException {
         ClassLoader cl = Class.forName("com.codecool.shop.util.DatabaseHelper").getClassLoader();
         Map<String, String> databaseData = new HashMap<>();
+        String fileName = getCredentialsFileName();
 
         try {
-            InputStream input = cl.getResourceAsStream(filename);
+            InputStream input = cl.getResourceAsStream(fileName);
 
             Properties prop = new Properties();
 
@@ -56,8 +47,16 @@ public class DatabaseHelper {
         return databaseData;
     }
 
-    private static void executeSqlFile(String sqlFileName, String credentialsFileName) {
-        String cmd = getPsqlCommand(sqlFileName, credentialsFileName);
+    private static String getCredentialsFileName() {
+        if (Util.isJUnitTest()) {
+            return "sql/credentials/test_db.properties";
+        } else {
+            return "sql/credentials/production_db.properties";
+        }
+    }
+
+    private static void executeSqlFile(String sqlFileName) {
+        String cmd = getPsqlCommand(sqlFileName);
         try {
             Process process = Runtime.getRuntime().exec(cmd);
             process.waitFor();
@@ -68,7 +67,7 @@ public class DatabaseHelper {
         }
     }
 
-    private static String getPsqlCommand(String commandsFileName, String credentialsFileName) {
+    private static String getPsqlCommand(String commandsFileName) {
         URL res = DatabaseHelper.class.getClassLoader().getResource(commandsFileName);
 
         try {
@@ -78,7 +77,7 @@ public class DatabaseHelper {
             File file = Paths.get(res.toURI()).toFile();
             String filePath = file.getAbsolutePath();
 
-            Map<String, String> dbCredentials = getCredentials(credentialsFileName);
+            Map<String, String> dbCredentials = getCredentials();
             String user = dbCredentials.get("user");
             String database = dbCredentials.get("database");
 
