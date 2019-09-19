@@ -69,8 +69,9 @@ public class Cart extends BaseModel {
         return String.format(
                 "items: %1$s, " +
                         "currency: %2$s",
-                this.items(),
-                this.currency);
+                items(),
+                currency
+        );
     }
 
     private Optional<LineItem> getItem(Product product) {

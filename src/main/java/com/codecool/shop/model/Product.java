@@ -45,12 +45,13 @@ public class Product extends ProductModel {
                         "defaultCurrency: %5$s, " +
                         "productCategory: %6$s, " +
                         "supplier: %7$s}",
-                this.getClass().getSimpleName(),
-                this.id,
-                this.name,
-                this.getPrice(),
-                this.defaultCurrency,
-                this.productCategory.getName(),
-                this.supplier.getName());
+                getClass().getSimpleName(),
+                id,
+                name,
+                getPrice(),
+                defaultCurrency,
+                productCategory.getName(),
+                supplier.getName()
+        );
     }
 }

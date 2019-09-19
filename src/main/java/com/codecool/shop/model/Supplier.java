@@ -11,10 +11,10 @@ public class Supplier extends ProductModel {
                         "id: %2$d, " +
                         "name: %3$s, " +
                         "description: %4$s}",
-                this.getClass().getSimpleName(),
-                this.id,
-                this.name,
-                this.description
+                getClass().getSimpleName(),
+                id,
+                name,
+                description
         );
     }
 }

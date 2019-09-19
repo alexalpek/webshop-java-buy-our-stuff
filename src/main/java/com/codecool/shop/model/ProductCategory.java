@@ -19,10 +19,11 @@ public class ProductCategory extends ProductModel {
                         "name: %3$s, " +
                         "department: %4$s, " +
                         "description: %5$s}",
-                this.getClass().getSimpleName(),
-                this.id,
-                this.name,
-                this.department,
-                this.description);
+                getClass().getSimpleName(),
+                id,
+                name,
+                department,
+                description
+        );
     }
 }

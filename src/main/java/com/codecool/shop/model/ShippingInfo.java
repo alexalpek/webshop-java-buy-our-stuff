@@ -3,7 +3,8 @@ package com.codecool.shop.model;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter @Setter
+@Getter
+@Setter
 public class ShippingInfo {
 
     private String name;
@@ -27,12 +28,12 @@ public class ShippingInfo {
                         "phoneNumber: %4$s, " +
                         "billingAddress: %5$s, " +
                         "shippingAddress: %6$s}",
-                this.getClass().getSimpleName(),
-                this.name,
-                this.email,
-                this.phoneNumber,
-                this.billingAddress,
-                this.shippingAddress
+                getClass().getSimpleName(),
+                name,
+                email,
+                phoneNumber,
+                billingAddress,
+                shippingAddress
         );
     }
 }
