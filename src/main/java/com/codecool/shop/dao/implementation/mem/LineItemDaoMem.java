@@ -26,16 +26,22 @@ public class LineItemDaoMem implements LineItemDao {
     public void update(LineItem lineItem, int quantity) {
         data
                 .stream()
-                .filter(item -> item.getProduct() == lineItem.getProduct())
+                .filter(
+                        item -> item.getProduct() == lineItem.getProduct()
+                )
                 .findFirst()
-                .ifPresent(item -> item.setQuantity(quantity));
+                .ifPresent(
+                        item -> item.setQuantity(quantity)
+                );
     }
 
     @Override
     public List<LineItem> getBy(Cart cart) {
         return data
                 .stream()
-                .filter(lineItem -> lineItem.getCartId() == cart.getId())
+                .filter(
+                        lineItem -> lineItem.getCartId() == cart.getId()
+                )
                 .collect(Collectors.toList());
     }
 }

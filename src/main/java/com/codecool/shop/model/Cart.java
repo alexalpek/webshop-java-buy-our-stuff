@@ -52,9 +52,15 @@ public class Cart extends BaseModel {
     }
 
     public BigDecimal getTotalPrice() {
-        return items().stream().map(
-                item -> item.getProduct().getDefaultPrice().multiply(new BigDecimal(item.getQuantity()))
-        ).reduce(BigDecimal::add).orElse(new BigDecimal(0));
+        return items()
+                .stream()
+                .map(
+                        item -> item.getProduct()
+                                .getDefaultPrice()
+                                .multiply(new BigDecimal(item.getQuantity()))
+                )
+                .reduce(BigDecimal::add)
+                .orElse(new BigDecimal(0));
     }
 
     public BigDecimal getTotalPrice(int decimals) {
@@ -62,7 +68,10 @@ public class Cart extends BaseModel {
     }
 
     public int size() {
-        return items().stream().mapToInt(LineItem::getQuantity).sum();
+        return items()
+                .stream()
+                .mapToInt(LineItem::getQuantity)
+                .sum();
     }
 
     public String toString() {
@@ -78,7 +87,9 @@ public class Cart extends BaseModel {
         List<LineItem> items = DaoController.getLineItemDao().getBy(this);
         return items
                 .stream()
-                .filter(item -> item.getProduct().getId() == product.getId())
+                .filter(
+                        item -> item.getProduct().getId() == product.getId()
+                )
                 .findFirst();
     }
 

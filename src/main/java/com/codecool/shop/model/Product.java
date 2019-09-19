@@ -28,7 +28,7 @@ public class Product extends ProductModel {
     }
 
     public String getPrice() {
-        return String.valueOf(this.getDefaultPrice(2)) + " " + this.defaultCurrency.toString();
+        return getDefaultPrice(2) + " " + defaultCurrency.toString();
     }
 
     public void setPrice(BigDecimal price, String currency) {
