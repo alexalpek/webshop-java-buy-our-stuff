@@ -1,10 +1,10 @@
-package com.codecool.shop.dao.implementation.jdbc;
+package com.codecool.shop.dao;
 
 import com.codecool.shop.dao.DaoController;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 
-public class DaoJDBCTest {
+public class DaoTest {
 
     @BeforeEach
     void initData() {

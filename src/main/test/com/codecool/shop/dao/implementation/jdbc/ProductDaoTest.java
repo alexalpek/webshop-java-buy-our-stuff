@@ -1,9 +1,6 @@
 package com.codecool.shop.dao.implementation.jdbc;
 
-import com.codecool.shop.dao.DaoController;
-import com.codecool.shop.dao.ProductCategoryDao;
-import com.codecool.shop.dao.ProductDao;
-import com.codecool.shop.dao.SupplierDao;
+import com.codecool.shop.dao.*;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
@@ -12,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 
-class ProductDaoJDBCTest extends DaoJDBCTest {
+class ProductDaoTest extends DaoTest {
 
     @Test
     void add() {
