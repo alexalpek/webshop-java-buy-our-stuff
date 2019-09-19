@@ -98,7 +98,16 @@ h2, #sum-div {
     margin-top: 80px;
 }
 
-#link-back-to-main-page:link, #link-back-to-main-page:visited, #link-back-to-main-page:hover, #link-back-to-main-page:active {
+#link-back-to-main-page:link, #link-back-to-main-page:visited, #link-back-to-main-page:hover, #link-back-to-main-page:active, a {
     text-decoration: none;
     color: #000000;
+}
+/* FROM HERE THE STYLE HAPPENS */
+
+.jumbotron {
+    background-color: #28a745; !important;
+}
+
+.jumbotron h1 {
+    color: #fff; !important;
 }
