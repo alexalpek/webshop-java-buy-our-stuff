@@ -3,23 +3,14 @@ package com.codecool.shop.model;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Getter @Setter
 public class ProductCategory extends ProductModel {
 
     private String department;
-    private List<Product> products;
 
     public ProductCategory(String name, String department, String description) {
         super(name, description);
         this.department = department;
-        this.products = new ArrayList<>();
-    }
-
-    public void addProduct(Product product) {
-        this.products.add(product);
     }
 
     public String toString() {
