@@ -1,25 +1,22 @@
 package com.codecool.shop.dao.implementation.jdbc;
 
-import com.codecool.shop.config.ConfigFileReader;
-import lombok.Cleanup;
+import com.codecool.shop.util.DatabaseHelper;
 
 import java.sql.*;
 import java.util.Map;
 
 public abstract class DaoJDBC {
 
-    private static final String DATABASE;
-    private static final String USERNAME;
-    private static final String PASSWORD;
+    private static String DATABASE;
+    private static String USERNAME;
+    private static String PASSWORD;
 
     static {
-        ConfigFileReader cfr = new ConfigFileReader();
-
         try {
-            Map<String, String> databaseData = cfr.readDataFromFile("connection.properties");
-            USERNAME = databaseData.get("user");
-            DATABASE = databaseData.get("url") + "/" + databaseData.get("database");
-            PASSWORD = databaseData.get("password");
+            Map<String, String> credentials = DatabaseHelper.getCredentials();
+            USERNAME = credentials.get("user");
+            DATABASE = credentials.get("url") + "/" + credentials.get("database");
+            PASSWORD = credentials.get("password");
         }
         catch (ClassNotFoundException e){
             throw new RuntimeException("Class not found");
