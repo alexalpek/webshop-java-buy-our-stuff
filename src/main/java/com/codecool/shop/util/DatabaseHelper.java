@@ -24,6 +24,14 @@ public class DatabaseHelper {
         executeSqlFile(sqlFileName, credentialsFileName);
     }
 
+    public static String getCredentialsFileName() {
+        if (Util.isJUnitTest()) {
+            return "sql/credentials/test_db.properties";
+        } else {
+            return "sql/credentials/production_db.properties";
+        }
+    }
+
     public static Map<String, String> getCredentials(String filename) throws ClassNotFoundException {
         ClassLoader cl = Class.forName("com.codecool.shop.util.DatabaseHelper").getClassLoader();
         Map<String, String> databaseData = new HashMap<>();
@@ -46,14 +54,6 @@ public class DatabaseHelper {
         }
 
         return databaseData;
-    }
-
-    private static String getCredentialsFileName() {
-        if (Util.isJUnitTest()) {
-            return "sql/credentials/test_db.properties";
-        } else {
-            return "sql/credentials/production_db.properties";
-        }
     }
 
     private static void executeSqlFile(String sqlFileName, String credentialsFileName) {

@@ -7,12 +7,12 @@ import java.util.Map;
 
 public abstract class DaoJDBC {
 
-    private static final String DATABASE;
-    private static final String USERNAME;
-    private static final String PASSWORD;
+    private static String DATABASE;
+    private static String USERNAME;
+    private static String PASSWORD;
 
     static {
-        String fileName = "sql/credentials/production_db.properties";
+        String fileName = DatabaseHelper.getCredentialsFileName();
 
         try {
             Map<String, String> credentials = DatabaseHelper.getCredentials(fileName);
