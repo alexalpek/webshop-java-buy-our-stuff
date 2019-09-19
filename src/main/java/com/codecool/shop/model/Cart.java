@@ -2,11 +2,13 @@ package com.codecool.shop.model;
 
 import com.codecool.shop.dao.DaoController;
 import com.codecool.shop.dao.LineItemDao;
+import lombok.Getter;
 
 import java.util.*;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
+@Getter
 public class Cart extends BaseModel {
 
     private final int accountId;
@@ -15,10 +17,6 @@ public class Cart extends BaseModel {
     public Cart(String currencyString, int accountId) {
         this.currency = Currency.getInstance(currencyString);
         this.accountId = accountId;
-    }
-
-    public Currency getCurrency() {
-        return currency;
     }
 
     public List<LineItem> getItems() {

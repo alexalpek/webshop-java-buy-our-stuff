@@ -1,31 +1,21 @@
 package com.codecool.shop.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
 public class LineItem {
 
-    private Product product;
+    @Setter
     private int quantity;
+
+    private Product product;
     private int cartId;
 
     public LineItem(Product product, int quantity, Cart cart) {
         this.product = product;
         this.quantity = quantity;
         this.cartId = cart.getId();
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public int getCartId() {
-        return cartId;
     }
 
     public String toString() {
