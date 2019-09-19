@@ -145,7 +145,7 @@ public class ProductDaoJDBC extends DaoJDBC implements ProductDao {
                 defaultCurrency, description, productCategory, supplier);
     }
 
-    private List<Product> createProductList(String query) throws SQLException{
+    private List<Product> createProductList(String query) throws SQLException {
         List<Product> result = new ArrayList<>();
 
         @Cleanup Connection conn = getConnection();

@@ -87,7 +87,7 @@ public class ProductCategoryDaoJDBC extends DaoJDBC implements ProductCategoryDa
                 String name = rs.getString("name");
                 String department = rs.getString("department");
                 String description = rs.getString("description");
-                ProductCategory productCategory = new ProductCategory(name,department, description);
+                ProductCategory productCategory = new ProductCategory(name, department, description);
                 productCategory.setId(id);
                 categories.add(productCategory);
             }

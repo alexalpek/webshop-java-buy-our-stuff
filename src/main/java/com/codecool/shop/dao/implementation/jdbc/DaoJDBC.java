@@ -17,8 +17,7 @@ public abstract class DaoJDBC {
             USERNAME = credentials.get("user");
             DATABASE = credentials.get("url") + "/" + credentials.get("database");
             PASSWORD = credentials.get("password");
-        }
-        catch (ClassNotFoundException e){
+        } catch (ClassNotFoundException e) {
             throw new RuntimeException("Class not found");
         }
     }

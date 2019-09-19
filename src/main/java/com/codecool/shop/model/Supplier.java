@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Supplier extends ProductModel {
+
     private List<Product> products;
 
     public Supplier(String name, String description) {
