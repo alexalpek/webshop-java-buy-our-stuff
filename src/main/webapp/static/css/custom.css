@@ -99,15 +99,19 @@ h2, #sum-div {
 }
 
 #link-back-to-main-page:link, #link-back-to-main-page:visited, #link-back-to-main-page:hover, #link-back-to-main-page:active, a {
-    text-decoration: none;
+    text-decoration: none !important;
     color: #000000;
+}
+
+#button-container a {
+    color: #fff !important;
 }
 /* FROM HERE THE STYLE HAPPENS */
 
 .jumbotron {
-    background-color: #28a745; !important;
+    background-color: #28a745 !important;
 }
 
 .jumbotron h1 {
-    color: #fff; !important;
+    color: #fff !important;
 }

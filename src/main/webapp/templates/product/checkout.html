@@ -8,7 +8,7 @@
 <body>
 
 <div class="jumbotron text-center">
-    <h1><a id="link-back-to-main-page" class="nav-link" href="/">Codecool Shop</a></h1>
+    <h1>Codecool Shop</h1>
 </div>
 
 <div class="container">
@@ -25,22 +25,29 @@
                 </div>
                 <div class="form-group">
                     <label for="e-mail">E-mail address</label>
-                    <input class="form-control" type="email" id="e-mail" name="e-mail" placeholder="E-mail address" required>
+                    <input class="form-control" type="email" id="e-mail" name="e-mail" placeholder="E-mail address"
+                           required>
                 </div>
                 <div class="form-group">
                     <label for="phone-number">Phone number</label>
-                    <input class="form-control" id="phone-number" name="phone-number" type="tel" pattern="[0-9]{4} [0-9]{3} [0-9]{4}" placeholder="Phone number (XXXX 123 4567)" required>
+                    <input class="form-control" id="phone-number" name="phone-number" type="tel"
+                           pattern="[0-9]{4} [0-9]{3} [0-9]{4}" placeholder="Phone number (XXXX 123 4567)" required>
                 </div>
                 <div class="form-group">
                     <label for="billing-address">Billing address</label>
-                    <input class="form-control" id="billing-address" name="billing-address" placeholder="Billing address" required>
+                    <input class="form-control" id="billing-address" name="billing-address"
+                           placeholder="Billing address" required>
                 </div>
                 <div class="form-group">
                     <label for="shipping-address">Shopping address</label>
-                    <input class="form-control" id="shipping-address" name="shipping-address" placeholder="Shipping address" required>
+                    <input class="form-control" id="shipping-address" name="shipping-address"
+                           placeholder="Shipping address" required>
                 </div>
-                <input type="hidden" name="cart" th:value="${cart.id}">
-                <input class="btn btn-success" type="submit" value="Checkout">
+                <div id="button-container">
+                    <input type="hidden" name="cart" th:value="${cart.id}">
+                    <input class="btn btn-success" type="submit" value="Checkout">
+                    <a id="link-back-to-main-page" class="btn btn-success" href="/"> Go back </a>
+                </div>
             </form>
         </div>
     </div>

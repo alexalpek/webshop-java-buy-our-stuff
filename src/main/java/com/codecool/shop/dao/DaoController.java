@@ -22,7 +22,7 @@ public class DaoController {
     @Getter private static LineItemDao lineItemDao;
 
     static {
-        String type = System.getenv("dao"); // TODO
+        String type = System.getenv("dao");
         USING_JDBC = type == null || !type.equals("mem");
 
         if (USING_JDBC) {
