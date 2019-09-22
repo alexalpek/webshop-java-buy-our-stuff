@@ -1,37 +1,30 @@
 package com.codecool.shop.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
 public class LineItem {
 
-    private Product product;
+    @Setter
     private int quantity;
 
-    public LineItem(Product product) {
+    private Product product;
+    private int cartId;
+
+    public LineItem(Product product, int quantity, Cart cart) {
         this.product = product;
-        this.quantity = 1;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void increaseQuantity() {
-        quantity++;
-    }
-
-    public void decreaseQuantity() {
-        quantity--;
-    }
-
-    public Product getProduct() {
-        return product;
+        this.quantity = quantity;
+        this.cartId = cart.getId();
     }
 
     public String toString() {
         return String.format("%1$s={" +
                         "quantity: %2$d, " +
                         "product: %3$s}",
-                this.getClass().getSimpleName(),
-                this.quantity,
-                this.product);
+                getClass().getSimpleName(),
+                quantity,
+                product
+        );
     }
 }

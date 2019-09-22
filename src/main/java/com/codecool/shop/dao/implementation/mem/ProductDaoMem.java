@@ -1,4 +1,4 @@
-package com.codecool.shop.dao.implementation;
+package com.codecool.shop.dao.implementation.mem;
 
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.model.Product;
@@ -12,19 +12,6 @@ import java.util.stream.Collectors;
 public class ProductDaoMem implements ProductDao {
 
     private List<Product> data = new ArrayList<>();
-    private static ProductDaoMem instance = null;
-
-    /* A private Constructor prevents any other class from instantiating.
-     */
-    private ProductDaoMem() {
-    }
-
-    public static ProductDaoMem getInstance() {
-        if (instance == null) {
-            instance = new ProductDaoMem();
-        }
-        return instance;
-    }
 
     @Override
     public void add(Product product) {
@@ -34,7 +21,11 @@ public class ProductDaoMem implements ProductDao {
 
     @Override
     public Product find(int id) {
-        return data.stream().filter(t -> t.getId() == id).findFirst().orElse(null);
+        return data
+                .stream()
+                .filter(t -> t.getId() == id)
+                .findFirst()
+                .orElse(null);
     }
 
     @Override
@@ -49,11 +40,21 @@ public class ProductDaoMem implements ProductDao {
 
     @Override
     public List<Product> getBy(Supplier supplier) {
-        return data.stream().filter(t -> t.getSupplier().equals(supplier)).collect(Collectors.toList());
+        return data
+                .stream()
+                .filter(
+                        t -> t.getSupplier().equals(supplier)
+                )
+                .collect(Collectors.toList());
     }
 
     @Override
     public List<Product> getBy(ProductCategory productCategory) {
-        return data.stream().filter(t -> t.getProductCategory().equals(productCategory)).collect(Collectors.toList());
+        return data
+                .stream()
+                .filter(
+                        t -> t.getProductCategory().equals(productCategory)
+                )
+                .collect(Collectors.toList());
     }
 }
