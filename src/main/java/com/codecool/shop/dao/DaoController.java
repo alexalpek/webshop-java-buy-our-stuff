@@ -7,6 +7,7 @@ import com.codecool.shop.model.Cart;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
+import lombok.Getter;
 
 import java.math.BigDecimal;
 
@@ -14,14 +15,14 @@ public class DaoController {
 
     private static final boolean USING_JDBC;
 
-    private static ProductDao productDao;
-    private static ProductCategoryDao productCategoryDao;
-    private static SupplierDao supplierDao;
-    private static CartDao cartDao;
-    private static LineItemDao lineItemDao;
+    @Getter private static ProductDao productDao;
+    @Getter private static ProductCategoryDao productCategoryDao;
+    @Getter private static SupplierDao supplierDao;
+    @Getter private static CartDao cartDao;
+    @Getter private static LineItemDao lineItemDao;
 
     static {
-        String type = System.getenv("dao"); // TODO
+        String type = System.getenv("dao");
         USING_JDBC = type == null || !type.equals("mem");
 
         if (USING_JDBC) {
@@ -40,26 +41,6 @@ public class DaoController {
         }
 
         printImplementationInfo();
-    }
-
-    public static SupplierDao getSupplierDao() {
-        return supplierDao;
-    }
-
-    public static ProductCategoryDao getProductCategoryDao() {
-        return productCategoryDao;
-    }
-
-    public static ProductDao getProductDao() {
-        return productDao;
-    }
-
-    public static CartDao getCartDao() {
-        return cartDao;
-    }
-
-    public static LineItemDao getLineItemDao() {
-        return lineItemDao;
     }
 
     public static void init() {

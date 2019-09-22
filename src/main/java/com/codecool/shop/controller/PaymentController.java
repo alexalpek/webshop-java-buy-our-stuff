@@ -16,7 +16,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-
 @WebServlet(urlPatterns = {"/payment"})
 public class PaymentController extends HttpServlet {
 

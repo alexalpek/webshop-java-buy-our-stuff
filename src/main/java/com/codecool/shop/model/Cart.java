@@ -2,11 +2,13 @@ package com.codecool.shop.model;
 
 import com.codecool.shop.dao.DaoController;
 import com.codecool.shop.dao.LineItemDao;
+import lombok.Getter;
 
 import java.util.*;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
+@Getter
 public class Cart extends BaseModel {
 
     private final int accountId;
@@ -15,10 +17,6 @@ public class Cart extends BaseModel {
     public Cart(String currencyString, int accountId) {
         this.currency = Currency.getInstance(currencyString);
         this.accountId = accountId;
-    }
-
-    public Currency getCurrency() {
-        return currency;
     }
 
     public List<LineItem> getItems() {
@@ -54,9 +52,15 @@ public class Cart extends BaseModel {
     }
 
     public BigDecimal getTotalPrice() {
-        return items().stream().map(
-                item -> item.getProduct().getDefaultPrice().multiply(new BigDecimal(item.getQuantity()))
-        ).reduce(BigDecimal::add).orElse(new BigDecimal(0));
+        return items()
+                .stream()
+                .map(
+                        item -> item.getProduct()
+                                .getDefaultPrice()
+                                .multiply(new BigDecimal(item.getQuantity()))
+                )
+                .reduce(BigDecimal::add)
+                .orElse(new BigDecimal(0));
     }
 
     public BigDecimal getTotalPrice(int decimals) {
@@ -64,22 +68,28 @@ public class Cart extends BaseModel {
     }
 
     public int size() {
-        return items().stream().mapToInt(LineItem::getQuantity).sum();
+        return items()
+                .stream()
+                .mapToInt(LineItem::getQuantity)
+                .sum();
     }
 
     public String toString() {
         return String.format(
                 "items: %1$s, " +
                         "currency: %2$s",
-                this.items(),
-                this.currency);
+                items(),
+                currency
+        );
     }
 
     private Optional<LineItem> getItem(Product product) {
         List<LineItem> items = DaoController.getLineItemDao().getBy(this);
         return items
                 .stream()
-                .filter(item -> item.getProduct().getId() == product.getId())
+                .filter(
+                        item -> item.getProduct().getId() == product.getId()
+                )
                 .findFirst();
     }
 

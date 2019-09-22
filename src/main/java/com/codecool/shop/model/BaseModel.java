@@ -1,18 +1,14 @@
 package com.codecool.shop.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.lang.reflect.Field;
 
+@Getter @Setter
 public abstract class BaseModel {
 
     protected int id;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     @Override
     public String toString() {

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CartDaoJDBC extends DaoJDBC implements CartDao {
-    //account ID, Currency String, ID.
+
     private int userId = 1; //TODO: get logged in user's id!
 
     @Override

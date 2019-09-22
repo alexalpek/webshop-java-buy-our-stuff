@@ -14,9 +14,9 @@ public class Order {
         return String.format("%1$s={" +
                         "shippingInfo: %2$s, " +
                         "cart: %3$s}",
-                this.getClass().getSimpleName(),
-                this.shippingInfo,
-                this.cart
+                getClass().getSimpleName(),
+                shippingInfo,
+                cart
         );
     }
 }

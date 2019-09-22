@@ -18,7 +18,11 @@ public class CartDaoMem implements CartDao {
 
     @Override
     public Cart find(int id) {
-        return data.stream().filter(t -> t.getId() == id).findFirst().orElse(null);
+        return data
+                .stream()
+                .filter(t -> t.getId() == id)
+                .findFirst()
+                .orElse(null);
     }
 
     @Override
