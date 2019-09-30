@@ -20,6 +20,7 @@ public class DaoController {
     @Getter private static SupplierDao supplierDao;
     @Getter private static CartDao cartDao;
     @Getter private static LineItemDao lineItemDao;
+    @Getter private static UserDao userDao;
 
     static {
         String type = System.getenv("dao");
@@ -31,12 +32,14 @@ public class DaoController {
             supplierDao = new SupplierDaoJDBC();
             cartDao = new CartDaoJDBC();
             lineItemDao = new LineItemDaoJDBC();
+            userDao = new UserDaoJDBC();
         } else {
             productDao = new ProductDaoMem();
             productCategoryDao = new ProductCategoryDaoMem();
             supplierDao = new SupplierDaoMem();
             cartDao = new CartDaoMem();
             lineItemDao = new LineItemDaoMem();
+            userDao = new UserDaoMem();
             initMemory();
         }
 
@@ -83,6 +86,7 @@ public class DaoController {
         supplierDao = new SupplierDaoMem();
         cartDao = new CartDaoMem();
         lineItemDao = new LineItemDaoMem();
+        userDao = new UserDaoMem();
     }
 
     private static void printImplementationInfo() {

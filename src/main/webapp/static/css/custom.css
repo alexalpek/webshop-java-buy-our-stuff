@@ -115,3 +115,21 @@ h2, #sum-div {
 .jumbotron h1 {
     color: #fff !important;
 }
+
+.form-field{
+    padding: 15px;
+}
+
+.back-to-home {
+    float: left !important;
+    text-decoration: none !important;
+    color: #8d8d8d !important;
+}
+
+.logged-in-name {
+    padding-right: 15px;
+}
+
+.error-message{
+    color: red;
+}

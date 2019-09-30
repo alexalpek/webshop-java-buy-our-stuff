@@ -14,13 +14,19 @@
 <div class="container">
     <div id="shopping-cart-amount" th:switch="${cartSize}">
         <div th:case="'0'">
-            <div th:text="${cartSize}"> 0</div>
+            <div th:text="${cartSize}"> 0 </div>
             <img id="shopping-cart-image-no-link" class="" src="http://placehold.it/40x40/000/fff"
-                                 th:attr="src='/static/img/cart.png'" alt=""/></div>
+            th:attr="src='/static/img/cart.png'" alt=""/>
+            <div class="logged-in-name" th:if="${session.user}" th:text="${session.user.name}"></div>
+        </div>
         <div th:case="*">
             <div th:text="${cartSize}"> 0</div>
-            <a href="/cart"><img id="shopping-cart-image" class="" src="http://placehold.it/40x40/000/fff"
-                                 th:attr="src='/static/img/cart.png'" alt=""/></a></div>
+            <a href="/cart">
+                <img id="shopping-cart-image" class="" src="http://placehold.it/40x40/000/fff"
+                th:attr="src='/static/img/cart.png'" alt=""/>
+            </a>
+            <div class="logged-in-name" th:if="${session.user}" th:text="${session.user.name}"></div>
+        </div>
     </div>
     <ul id="nav-tab" class="nav nav-tabs" th:switch="${cartSize}">
         <li class="nav-item">
@@ -31,6 +37,13 @@
         </li>
         <li class="nav-item" th:case="*">
             <a class="nav-link" href="/cart">Cart</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/logout" th:if="${session.user}">Logout</a>
+            <a class="nav-link" href="/login" th:unless="${session.user}">Login</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/cart">Register</a>
         </li>
     </ul>
     <div class="card">

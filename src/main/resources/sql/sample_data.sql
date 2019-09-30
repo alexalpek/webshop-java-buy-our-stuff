@@ -1,5 +1,5 @@
 INSERT INTO account
-VALUES (1, 'Barna', 'a');
+VALUES (1, 'Barna', '$2a$10$CFsnGLavtXm9C4sieC0YO.X..O5BWkGAQiFKj3hXeTWlxfjr/uFja');
 SELECT pg_catalog.setval('account_id_seq', 1, true);
 
 INSERT INTO shipping_info
