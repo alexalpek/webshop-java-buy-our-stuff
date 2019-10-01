@@ -57,6 +57,7 @@ CREATE TABLE account
     id       SERIAL NOT NULL,
     name     varchar(40),
     password text,
+    cart_id int,
     UNIQUE (name)
 );
 
@@ -65,7 +66,6 @@ DROP SEQUENCE IF EXISTS cart_id_seq;
 CREATE TABLE cart
 (
     id         SERIAL NOT NULL,
-    account_id int,
     currency   varchar(10)
 );
 
@@ -123,8 +123,8 @@ ALTER TABLE ONLY product
     ADD CONSTRAINT fk_supplier_id FOREIGN KEY (supplier_id) REFERENCES supplier (id) ON DELETE CASCADE;
 ALTER TABLE ONLY product
     ADD CONSTRAINT fk_product_category_id FOREIGN KEY (product_category_id) REFERENCES product_category (id) ON DELETE CASCADE;
-ALTER TABLE ONLY cart
-    ADD CONSTRAINT fk_account_id FOREIGN KEY (account_id) REFERENCES account (id) ON DELETE CASCADE;
+ALTER TABLE ONLY account
+    ADD CONSTRAINT fk_cart_id FOREIGN KEY (cart_id) REFERENCES cart (id) ON DELETE CASCADE;
 ALTER TABLE ONLY line_item
     ADD CONSTRAINT fk_product_category_id FOREIGN KEY (product_id) REFERENCES product (id) ON DELETE CASCADE;
 ALTER TABLE ONLY shipping_info

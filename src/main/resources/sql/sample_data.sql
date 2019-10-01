@@ -1,14 +1,16 @@
+
+INSERT INTO cart
+VALUES (1, 'USD');
+SELECT pg_catalog.setval('cart_id_seq', 1, true);
+
 INSERT INTO account
-VALUES (1, 'Barna', 'a');
+VALUES (1, 'Barna', '$2a$10$CFsnGLavtXm9C4sieC0YO.X..O5BWkGAQiFKj3hXeTWlxfjr/uFja', 1);
 SELECT pg_catalog.setval('account_id_seq', 1, true);
 
 INSERT INTO shipping_info
 VALUES (1, 1, 'Matrai Barnabas', 'asd@gmail.com', '0630-123-4567', 'semmi', 'semmi');
 SELECT pg_catalog.setval('shipping_info_id_seq', 1, true);
 
-INSERT INTO cart
-VALUES (1, 1, 'USD');
-SELECT pg_catalog.setval('cart_id_seq', 1, true);
 
 INSERT INTO order_info
 VALUES (1, 1, 1, 1);
