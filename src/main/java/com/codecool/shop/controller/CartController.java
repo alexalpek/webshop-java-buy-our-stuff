@@ -3,6 +3,8 @@ package com.codecool.shop.controller;
 import com.codecool.shop.dao.CartDao;
 import com.codecool.shop.dao.DaoController;
 import com.codecool.shop.config.TemplateEngineUtil;
+import com.codecool.shop.dao.LineItemDao;
+import com.codecool.shop.model.LineItem;
 import com.codecool.shop.model.User;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
@@ -31,5 +33,31 @@ public class CartController extends HttpServlet {
             context.setVariable("cart", cartDataStore.find(user.getCartId()));
             engine.process("product/cart.html", context, resp.getWriter());
         }
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        LineItemDao lineItemDao = DaoController.getLineItemDao();
+        int lineItemId = Integer.parseInt(req.getParameter("line-item-id"));
+        LineItem lineItem = lineItemDao.find(lineItemId);
+
+        switch (req.getParameter("edit")) {
+            case "add":
+                lineItemDao.update(lineItem, lineItem.getQuantity() + 1);
+                break;
+            case "remove":
+                if (lineItem.getQuantity() > 1) {
+                    lineItemDao.update(lineItem, lineItem.getQuantity() - 1);
+                } else {
+                    lineItemDao.remove(lineItem);
+                }
+                break;
+            case "remove all":
+                lineItemDao.remove(lineItem);
+                break;
+            default:
+                throw new RuntimeException("Invalid cart operation");
+        }
+        resp.sendRedirect("/cart");
     }
 }

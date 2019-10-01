@@ -41,6 +41,20 @@
                     <td th:text="${item.quantity}">Quantity</td>
                     <td th:text="${price} + ${item.product.defaultCurrency.symbol}">Unit price</td>
                     <td th:text="${price} * ${item.quantity} + ${item.product.defaultCurrency.symbol}">Total price</td>
+                    <td class="cart-edit-form">
+                        <form method="post">
+                            <input type="hidden" name="line-item-id" th:value="${item.id}">
+                            <input type="submit" name="edit" value="add">
+                        </form>
+                        <form method="post">
+                            <input type="hidden" name="line-item-id" th:value="${item.id}">
+                            <input type="submit" name="edit" value="remove">
+                        </form>
+                        <form method="post">
+                            <input type="hidden" name="line-item-id" th:value="${item.id}">
+                            <input type="submit" name="edit" value="remove all">
+                        </form>
+                    </td>
                 </tr>
                 </tbody>
             </table>

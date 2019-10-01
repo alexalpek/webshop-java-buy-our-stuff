@@ -133,3 +133,7 @@ h2, #sum-div {
 .error-message{
     color: red;
 }
+
+.cart-edit-form form {
+    display: inline-block;
+}
