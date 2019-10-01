@@ -6,6 +6,7 @@ import com.codecool.shop.dao.DaoController;
 import com.codecool.shop.model.Cart;
 import com.codecool.shop.model.Order;
 import com.codecool.shop.model.ShippingInfo;
+import com.codecool.shop.model.User;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -21,6 +22,10 @@ public class PaymentController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        User user = (User) req.getSession().getAttribute("user");
+        if (user == null) {
+            resp.sendRedirect("/");
+        }
         String name = req.getParameter("name");
         String email = req.getParameter("e-mail");
         String phoneNumber = req.getParameter("phone-number");
@@ -36,6 +41,7 @@ public class PaymentController extends HttpServlet {
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
         engine.process("product/payment.html", context, resp.getWriter());
+
     }
 
     @Override

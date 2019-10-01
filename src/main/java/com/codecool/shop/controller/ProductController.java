@@ -6,6 +6,7 @@ import com.codecool.shop.model.Cart;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.config.TemplateEngineUtil;
+import com.codecool.shop.model.User;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -27,14 +28,17 @@ public class ProductController extends HttpServlet {
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
+
+        User user = (User) req.getSession().getAttribute("user");
+
         context.setVariable("category", productCategoryDataStore.find(1));
         context.setVariable("products", productDataStore.getBy(productCategoryDataStore.find(1)));
-        context.setVariable("cartSize", cartDataStore.find(1).size());
-        // // Alternative setting of the template context
-        // Map<String, Object> params = new HashMap<>();
-        // params.put("category", productCategoryDataStore.find(1));
-        // params.put("products", productDataStore.getBy(productCategoryDataStore.find(1)));
-        // context.setVariables(params);
+        if (user != null) {
+            int cartId = user.getCartId();
+            context.setVariable("cartSize", cartDataStore.find(cartId).size());
+        } else {
+            context.setVariable("cartSize", 0);
+        }
         engine.process("product/index.html", context, resp.getWriter());
     }
 
@@ -44,7 +48,9 @@ public class ProductController extends HttpServlet {
         ProductDao productDataStore = DaoController.getProductDao();
 
         int productId = Integer.parseInt(req.getParameter("product"));
-        Cart cart = cartDataStore.find(1);
+        User user = (User) req.getSession().getAttribute("user");
+        int cartId = user.getCartId();
+        Cart cart = cartDataStore.find(cartId);
 
         cart.add(productDataStore.find(productId));
         doGet(req, resp);

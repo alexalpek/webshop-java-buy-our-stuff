@@ -3,6 +3,7 @@ package com.codecool.shop.controller;
 import com.codecool.shop.dao.CartDao;
 import com.codecool.shop.dao.DaoController;
 import com.codecool.shop.config.TemplateEngineUtil;
+import com.codecool.shop.model.User;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -22,7 +23,13 @@ public class CartController extends HttpServlet {
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
-        context.setVariable("cart", cartDataStore.find(1));
-        engine.process("product/cart.html", context, resp.getWriter());
+
+        User user = (User) req.getSession().getAttribute("user");
+        if (user == null) {
+            resp.sendRedirect("/");
+        } else {
+            context.setVariable("cart", cartDataStore.find(user.getCartId()));
+            engine.process("product/cart.html", context, resp.getWriter());
+        }
     }
 }

@@ -64,7 +64,7 @@ public class DaoController {
     }
 
     private static void initMemory() {
-        Cart cart = new Cart("USD", 1); //TODO
+        Cart cart = new Cart("USD");
         cartDao.add(cart);
 
         Supplier amazon = new Supplier("Amazon", "Digital content and services");

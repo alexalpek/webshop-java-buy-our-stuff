@@ -11,12 +11,10 @@ import java.math.RoundingMode;
 @Getter
 public class Cart extends BaseModel {
 
-    private final int accountId;
     private final Currency currency;
 
-    public Cart(String currencyString, int accountId) {
+    public Cart(String currencyString) {
         this.currency = Currency.getInstance(currencyString);
-        this.accountId = accountId;
     }
 
     public List<LineItem> getItems() {

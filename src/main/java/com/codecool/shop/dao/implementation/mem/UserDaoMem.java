@@ -1,6 +1,9 @@
 package com.codecool.shop.dao.implementation.mem;
 
+import com.codecool.shop.dao.CartDao;
+import com.codecool.shop.dao.DaoController;
 import com.codecool.shop.dao.UserDao;
+import com.codecool.shop.model.Cart;
 import com.codecool.shop.model.User;
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -14,7 +17,11 @@ public class UserDaoMem implements UserDao {
     @Override
     public void add(String name, String password) {
         if (isNameAvailable(name)) {
-            User user = new User(name);
+            CartDao cartDao = DaoController.getCartDao();
+            Cart cart = new Cart("USD");
+            cartDao.add(cart);
+
+            User user = new User(name, cart.getId());
             user.setId(users.size() + 1);
             String hashed = BCrypt.hashpw(password, BCrypt.gensalt());
             users.put(user, hashed);

@@ -10,18 +10,15 @@ import java.util.List;
 
 public class CartDaoJDBC extends DaoJDBC implements CartDao {
 
-    private int userId = 1; //TODO: get logged in user's id!
-
     @Override
     public void add(Cart cart) {
-        String query = "INSERT INTO cart (account_id, currency) VALUES (?, ?) RETURNING id";
+        String query = "INSERT INTO cart (currency) VALUES (?) RETURNING id";
 
         try {
             @Cleanup Connection conn = getConnection();
             @Cleanup PreparedStatement stmt = conn.prepareStatement(query);
 
-            stmt.setInt(1, userId);
-            stmt.setString(2, cart.getCurrency().getCurrencyCode());
+            stmt.setString(1, cart.getCurrency().getCurrencyCode());
             @Cleanup ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 int id = rs.getInt("id");
@@ -44,7 +41,7 @@ public class CartDaoJDBC extends DaoJDBC implements CartDao {
             @Cleanup ResultSet rs = stmt.executeQuery(query);
 
             if (rs.next()) {
-                Cart cart = new Cart("USD", userId); //TODO
+                Cart cart = new Cart("USD");
                 cart.setId(id);
                 return cart;
             }
@@ -81,7 +78,7 @@ public class CartDaoJDBC extends DaoJDBC implements CartDao {
 
             if (rs.next()) {
                 int id = rs.getInt("id");
-                Cart cart = new Cart("USD", userId); //TODO
+                Cart cart = new Cart("USD");
                 cart.setId(id);
                 cartList.add(cart);
             }

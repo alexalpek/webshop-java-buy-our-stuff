@@ -3,12 +3,14 @@ package com.codecool.shop.model;
 
 import lombok.Getter;
 
+@Getter
 public class User extends BaseModel {
 
-    @Getter
     private String name;
+    private int cartId;
 
-    public User(String name) {
+    public User(String name, int cartId) {
         this.name = name;
+        this.cartId = cartId;
     }
 }
