@@ -9,11 +9,11 @@ import java.util.Map;
 
 public class UserDaoMem implements UserDao {
 
-    Map<User, String> users = new HashMap<>();
+    private Map<User, String> users = new HashMap<>();
 
     @Override
     public void add(String name, String password) {
-        if (isUsernameAvailable(name)) {
+        if (isNameAvailable(name)) {
             User user = new User(name);
             user.setId(users.size() + 1);
             String hashed = BCrypt.hashpw(password, BCrypt.gensalt());
@@ -26,12 +26,14 @@ public class UserDaoMem implements UserDao {
         return users
                 .keySet()
                 .stream()
-                .filter(user -> user.getName().equals(name))
+                .filter(user -> user.getName().equals(name)
+                        && BCrypt.checkpw(password, users.get(user)))
                 .findFirst()
                 .orElse(null);
     }
 
-    private boolean isUsernameAvailable(String name) {
+    @Override
+    public boolean isNameAvailable(String name) {
         return users
                 .keySet()
                 .stream()

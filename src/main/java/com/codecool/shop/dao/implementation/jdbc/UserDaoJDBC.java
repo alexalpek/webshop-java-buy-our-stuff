@@ -49,4 +49,24 @@ public class UserDaoJDBC extends DaoJDBC implements UserDao {
         }
         return user;
     }
+
+    @Override
+    public boolean isNameAvailable(String username) {
+        String query = "SELECT id, password FROM account WHERE name = (?)";
+
+        try {
+            @Cleanup Connection conn = getConnection();
+            @Cleanup PreparedStatement stmt = conn.prepareStatement(query);
+
+            stmt.setString(1, username);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
 }
+
