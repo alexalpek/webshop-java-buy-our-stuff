@@ -20,17 +20,22 @@ public class CheckoutController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        User user = (User) req.getSession().getAttribute("user");
-        if (user == null) {
-            resp.sendRedirect("/");
-        }
         CartDao cartDataStore = DaoController.getCartDao();
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
 
-        int cartId = Integer.parseInt(req.getParameter("cart-id"));
-        Cart cart = cartDataStore.find(cartId);
-        context.setVariable("cart", cart);
-        engine.process("product/checkout.html", context, resp.getWriter());
+        User user = (User) req.getSession().getAttribute("user");
+        if (user == null) {
+            resp.sendRedirect("/");
+        } else {
+            Cart cart = cartDataStore.find(user.getCartId());
+            context.setVariable("cart", cart);
+            engine.process("product/checkout.html", context, resp.getWriter());
+        }
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doGet(req, resp);
     }
 }
