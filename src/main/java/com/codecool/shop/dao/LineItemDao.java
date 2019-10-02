@@ -13,5 +13,7 @@ public interface LineItemDao {
 
     void update(LineItem lineItem, int quantity);
 
+    LineItem find(int id);
+
     List<LineItem> getBy(Cart cart);
 }

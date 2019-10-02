@@ -133,3 +133,19 @@ h2, #sum-div {
 .error-message{
     color: red;
 }
+
+.cart-actions {
+    width: 15%;
+}
+
+.cart-actions form {
+    display: inline-block;
+}
+
+.cart-actions form button  {
+    background: none;
+    border: none;
+}
+.cart-actions form button:focus {
+    outline: none;
+}

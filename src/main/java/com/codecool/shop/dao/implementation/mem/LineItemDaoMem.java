@@ -27,12 +27,21 @@ public class LineItemDaoMem implements LineItemDao {
         data
                 .stream()
                 .filter(
-                        item -> item.getProduct() == lineItem.getProduct()
+                        item -> item.getId() == lineItem.getId()
                 )
                 .findFirst()
                 .ifPresent(
                         item -> item.setQuantity(quantity)
                 );
+    }
+
+    @Override
+    public LineItem find(int id) {
+        return data
+                .stream()
+                .filter(item -> item.getId() == id)
+                .findFirst()
+                .orElse(null);
     }
 
     @Override

@@ -30,7 +30,7 @@ public class Cart extends BaseModel {
                 LineItem item = match.get();
                 lineItemDao.update(item, item.getQuantity() + 1);
             } else {
-                lineItemDao.add(new LineItem(product, 1, this));
+                lineItemDao.add(new LineItem(product, id, 1));
             }
         }
     }
