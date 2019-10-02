@@ -20,12 +20,17 @@ INSERT INTO supplier
 VALUES (1, 'Amazon', 'Digital content and services');
 INSERT INTO supplier
 VALUES (2, 'Lenovo', 'Computers');
-SELECT pg_catalog.setval('supplier_id_seq', 2, true);
+INSERT INTO supplier
+VALUES (3, 'Dell', 'Computers');
+SELECT pg_catalog.setval('supplier_id_seq', 3, true);
 
 INSERT INTO product_category
 VALUES (1, 'Tablet', 'Hardware',
         'A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display.');
-SELECT pg_catalog.setval('product_category_id_seq', 1, true);
+INSERT INTO product_category
+VALUES (2, 'Laptop', 'Hardware',
+        'A laptop computer, commonly shortened to laptop, or called a notebook computer, is a small, portable personal computer typically having a thin LCD or LED computer screen display.');
+SELECT pg_catalog.setval('product_category_id_seq', 2, true);
 
 INSERT INTO product
 VALUES (1, 'Amazon Fire', 1, 1, 49.99, 'USD',
@@ -36,4 +41,7 @@ VALUES (2, 'Lenovo IdeaPad Miix 700', 2, 1, 479.99, 'USD',
 INSERT INTO product
 VALUES (3, 'Amazon Fire HD 8', 1, 1, 89.99, 'USD',
         'Amazon''s latest Fire HD 8 tablet is a great value for media consumption.');
-SELECT pg_catalog.setval('product_id_seq', 3, true);
+INSERT INTO product
+VALUES (4, 'Dell ChromeBook 11', 3, 2, 92.86, 'USD',
+        '11-inch ChromeBook laptop built to roll with the punches of family life. Featuring the speed, simplicity and security of Chrome in a portable design.');
+SELECT pg_catalog.setval('product_id_seq', 4, true);

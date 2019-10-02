@@ -44,9 +44,37 @@
         <li class="nav-item">
             <a class="nav-link" href="/register" th:unless="${session.user}">Register</a>
         </li>
+        <li class="nav-item">
+            <form method="post">
+                <div class="dropdown">
+                    <button class="btn btn-light dropdown-toggle" type="submit" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Categories
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <button type="submit" class="dropdown-item"
+                                th:each="cat,iterStat : ${categories}" th:text="${cat.name}"
+                                th:name="categoryId" th:value="${cat.id}">Category</button>
+                    </div>
+                </div>
+            </form>
+        </li>
+        <li class="nav-item">
+            <form method="post">
+                <div class="dropdown">
+                    <button class="btn btn-light dropdown-toggle" type="submit" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Suppliers
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <button type="submit" class="dropdown-item"
+                                th:each="sup,iterStat : ${suppliers}" th:text="${sup.name}"
+                                th:name="supplierId" th:value="${sup.id}">Supplier</button>
+                    </div>
+                </div>
+            </form>
+        </li>
     </ul>
     <div class="card">
-        <strong th:text="${category.name}">Category Title</strong>
+        <strong th:text="${filter.name}">Filtered By</strong>
     </div>
 
     <div id="products" class="row">

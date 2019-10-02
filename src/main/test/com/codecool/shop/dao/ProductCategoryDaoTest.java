@@ -46,7 +46,7 @@ class ProductCategoryDaoTest extends DaoTest {
 
     @Test
     void testGetAll() {
-        int productCategoryCount = 1;
+        int productCategoryCount = 2;
         ProductCategoryDao productCategoryDao = DaoController.getProductCategoryDao();
         List<ProductCategory> productCategories = productCategoryDao.getAll();
         Assertions.assertEquals(productCategoryCount, productCategories.size());
