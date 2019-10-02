@@ -47,7 +47,7 @@
         <li class="nav-item">
             <form method="post">
                 <div class="dropdown">
-                    <button name="test" class="btn btn-light dropdown-toggle" type="submit" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button class="btn btn-light dropdown-toggle" type="submit" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Categories
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -58,9 +58,23 @@
                 </div>
             </form>
         </li>
+        <li class="nav-item">
+            <form method="post">
+                <div class="dropdown">
+                    <button class="btn btn-light dropdown-toggle" type="submit" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Suppliers
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <button type="submit" class="dropdown-item"
+                                th:each="sup,iterStat : ${suppliers}" th:text="${sup.name}"
+                                th:name="supplierId" th:value="${sup.id}">Supplier</button>
+                    </div>
+                </div>
+            </form>
+        </li>
     </ul>
     <div class="card">
-        <strong th:text="${category.name}">Category Title</strong>
+        <strong th:text="${filter.name}">Filtered By</strong>
     </div>
 
     <div id="products" class="row">

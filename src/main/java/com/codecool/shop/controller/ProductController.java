@@ -4,6 +4,7 @@ import com.codecool.shop.dao.*;
 import com.codecool.shop.model.Cart;
 import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.model.ProductCategory;
+import com.codecool.shop.model.Supplier;
 import com.codecool.shop.model.User;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
@@ -20,7 +21,8 @@ import java.util.List;
 @WebServlet(urlPatterns = {"/"})
 public class ProductController extends HttpServlet {
 
-    private Integer categoryId = 1;
+    private Integer id = 1;
+    private boolean filterByCategory = true;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -32,22 +34,27 @@ public class ProductController extends HttpServlet {
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
 
-        User user = (User) req.getSession().getAttribute("user");
-
-        context.setVariable("categories", productCategoryDataStore.getAll());
-        context.setVariable("suppliers", supplierDataStore.getAll());
-
-        ProductCategory category = productCategoryDataStore.find(categoryId);
-        categoryId = 1;
-
-        context.setVariable("category", category);
-        context.setVariable("products", productDataStore.getBy(category));
-        if (user != null) {
+        if (Collections.list(req.getSession().getAttributeNames()).contains("user")) {
+            User user = (User) req.getSession().getAttribute("user");
             int cartId = user.getCartId();
             context.setVariable("cartSize", cartDataStore.find(cartId).size());
         } else {
             context.setVariable("cartSize", 0);
         }
+
+        context.setVariable("categories", productCategoryDataStore.getAll());
+        context.setVariable("suppliers", supplierDataStore.getAll());
+
+        if (filterByCategory) {
+            ProductCategory category = productCategoryDataStore.find(id);
+            context.setVariable("filter", category);
+            context.setVariable("products", productDataStore.getBy(category));
+        } else {
+            Supplier supplier = supplierDataStore.find(id);
+            context.setVariable("filter", supplier);
+            context.setVariable("products", productDataStore.getBy(supplier));
+        }
+
         engine.process("product/index.html", context, resp.getWriter());
     }
 
@@ -56,7 +63,11 @@ public class ProductController extends HttpServlet {
         List<String> params = Collections.list(req.getParameterNames());
 
         if (params.contains("categoryId")) {
-            categoryId = Integer.parseInt(req.getParameter("categoryId"));
+            id = Integer.parseInt(req.getParameter("categoryId"));
+            filterByCategory = true;
+        } else if (params.contains("supplierId")) {
+            id = Integer.parseInt(req.getParameter("supplierId"));
+            filterByCategory = false;
         } else {
             CartDao cartDataStore = DaoController.getCartDao();
             ProductDao productDataStore = DaoController.getProductDao();
