@@ -46,7 +46,7 @@ class SupplierDaoTest extends DaoTest {
 
     @Test
     void testGetAll() {
-        int supplierCount = 2;
+        int supplierCount = 3;
         SupplierDao supplierDao = DaoController.getSupplierDao();
         List<Supplier> suppliers = supplierDao.getAll();
         Assertions.assertEquals(supplierCount, suppliers.size());
