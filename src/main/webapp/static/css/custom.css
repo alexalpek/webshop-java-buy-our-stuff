@@ -149,3 +149,11 @@ h2, #sum-div {
 .cart-actions form button:focus {
     outline: none;
 }
+
+.center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
