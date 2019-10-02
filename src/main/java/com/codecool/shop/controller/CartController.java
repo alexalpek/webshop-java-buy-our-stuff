@@ -42,17 +42,17 @@ public class CartController extends HttpServlet {
         LineItem lineItem = lineItemDao.find(lineItemId);
 
         switch (req.getParameter("edit")) {
-            case "add":
+            case "increase":
                 lineItemDao.update(lineItem, lineItem.getQuantity() + 1);
                 break;
-            case "remove":
+            case "decrease":
                 if (lineItem.getQuantity() > 1) {
                     lineItemDao.update(lineItem, lineItem.getQuantity() - 1);
                 } else {
                     lineItemDao.remove(lineItem);
                 }
                 break;
-            case "remove all":
+            case "clear":
                 lineItemDao.remove(lineItem);
                 break;
             default:
