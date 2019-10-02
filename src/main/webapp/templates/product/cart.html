@@ -67,7 +67,7 @@
             </table>
 
             <div id="sum-div">
-                <h5 th:text="'Total price: ' + ${cart.getTotalPrice(2)} + ${cart.currency.symbol}">Total price</h5>
+                <h4 th:text="'Total price: ' + ${cart.getTotalPrice(2)} + ${cart.currency.symbol}">Total price</h4>
             </div>
 
             <form action="/checkout" method="post">
