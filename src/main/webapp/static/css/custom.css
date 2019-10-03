@@ -157,3 +157,33 @@ h2, #sum-div {
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
 }
+
+#error-container {
+    text-align: center;
+}
+
+#error-container h4 {
+    font-size: 145%;
+    font-weight: bold;
+}
+
+#error-container p {
+    font-size: 125%;
+}
+
+.main-page-error {
+    color: #a94442 !important;
+    text-decoration: underline !important;
+    text-decoration-color: #a94442 ;
+}
+
+#error-container .error-go-back {
+    font-size: 115%;
+}
+
+.jumbotron.text-center.error-jumbotron {
+    background-color: #e0a29d !important;
+    border-color: #ebccd1 !important;
+    margin-bottom: 10%; /* error potential? */
+    border-radius: 4px
+}

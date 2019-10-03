@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @WebServlet(urlPatterns = {"/error"})
@@ -30,9 +32,11 @@ public class ErrorController extends HttpServlet {
 
         if (message.isPresent() && statusCode.isPresent()) {
             try {
-                String error = statusCode.get() + ": " + message.get();
-                context.setVariable("error", error);
-                System.out.println(error);
+                String errorMessage = message.get();
+                Integer errorCode = statusCode.get();
+                context.setVariable("errorMessage", errorMessage);
+                context.setVariable("errorCode", errorCode);
+                engine.process("product/error.html", context, resp.getWriter());
 
                 //TODO: render template here
             } catch (NumberFormatException e) {
