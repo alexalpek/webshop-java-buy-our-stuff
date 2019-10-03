@@ -1,5 +1,7 @@
 package com.codecool.shop.dao.implementation.jdbc;
 
+import com.codecool.shop.dao.DataNotFoundException;
+import com.codecool.shop.dao.DataSourceException;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.model.ProductCategory;
 import lombok.Cleanup;
@@ -52,10 +54,10 @@ public class ProductCategoryDaoJDBC extends DaoJDBC implements ProductCategoryDa
                 return productCategory;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DataSourceException("Database not reachable", e);
         }
 
-        return null;
+        throw new DataNotFoundException("No such category");
     }
 
     @Override
