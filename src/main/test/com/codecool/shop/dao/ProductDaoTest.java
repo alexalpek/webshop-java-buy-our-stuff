@@ -1,7 +1,5 @@
 package com.codecool.shop.dao;
 
-import com.codecool.shop.dao.implementation.jdbc.ProductCategoryDaoJDBC;
-import com.codecool.shop.dao.implementation.jdbc.ProductDaoJDBC;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
@@ -40,19 +38,17 @@ class ProductDaoTest extends DaoTest {
     @Test
     void testFind_invalidId() {
         ProductDao productDao = DaoController.getProductDao();
-        Product result = productDao.find(-1);
-        Assertions.assertNull(result);
+        Assertions.assertThrows(DataNotFoundException.class, () -> productDao.find(-1));
     }
 
     @Test
     void testRemove() {
         int id = 1;
         ProductDao productDao = DaoController.getProductDao();
-        Product before = productDao.find(id);
+        Product product = productDao.find(id);
         productDao.remove(id);
-        Product after = productDao.find(id);
-        Assertions.assertNotNull(before);
-        Assertions.assertNull(after);
+        Assertions.assertNotNull(product);
+        Assertions.assertThrows(DataNotFoundException.class, () -> productDao.find(id));
     }
 
     @Test

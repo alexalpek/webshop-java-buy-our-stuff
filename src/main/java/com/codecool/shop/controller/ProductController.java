@@ -90,6 +90,9 @@ public class ProductController extends HttpServlet {
                 try {
                     cart.add(productDataStore.find(productId));
                 } catch (DataNotFoundException e) {
+                    Util.handleError(resp, HttpServletResponse.SC_BAD_REQUEST, e.getMessage());
+                    return;
+                } catch (DataSourceException e) {
                     Util.handleError(resp, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
                     return;
                 }
