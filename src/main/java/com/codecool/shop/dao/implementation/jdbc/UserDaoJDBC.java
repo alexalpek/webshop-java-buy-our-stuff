@@ -1,10 +1,9 @@
 package com.codecool.shop.dao.implementation.jdbc;
 
-import com.codecool.shop.dao.CartDao;
-import com.codecool.shop.dao.DaoController;
-import com.codecool.shop.dao.UserDao;
+import com.codecool.shop.dao.*;
 import com.codecool.shop.model.Cart;
 import com.codecool.shop.model.User;
+import com.codecool.shop.util.Error;
 import lombok.Cleanup;
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -34,14 +33,14 @@ public class UserDaoJDBC extends DaoJDBC implements UserDao {
             stmt.setInt(3, cart.getId());
             stmt.execute();
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DataSourceException(Error.DATABASE_IS_UNREACHABLE, e);
         }
     }
 
     @Override
     public User find(String username, String password) {
         String query = "SELECT id, password, cart_id FROM account WHERE name = (?)";
-        User user = null;
+
         try {
             @Cleanup Connection conn = getConnection();
             @Cleanup PreparedStatement stmt = conn.prepareStatement(query);
@@ -49,13 +48,15 @@ public class UserDaoJDBC extends DaoJDBC implements UserDao {
             stmt.setString(1, username);
             ResultSet rs = stmt.executeQuery();
             if (rs.next() && BCrypt.checkpw(password, rs.getString("password"))) {
-                user = new User(username, rs.getInt("cart_id"));
+                User user = new User(username, rs.getInt("cart_id"));
                 user.setId(rs.getInt("id"));
+                return user;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DataSourceException(Error.DATABASE_IS_UNREACHABLE, e);
         }
-        return user;
+
+        throw new DataNotFoundException(Error.NO_SUCH_USER);
     }
 
     @Override
@@ -72,7 +73,7 @@ public class UserDaoJDBC extends DaoJDBC implements UserDao {
                 return false;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DataSourceException(Error.DATABASE_IS_UNREACHABLE, e);
         }
         return true;
     }

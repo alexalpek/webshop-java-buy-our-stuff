@@ -7,6 +7,8 @@ import com.codecool.shop.model.Cart;
 import com.codecool.shop.model.Order;
 import com.codecool.shop.model.ShippingInfo;
 import com.codecool.shop.model.User;
+import com.codecool.shop.util.Error;
+import com.codecool.shop.util.Util;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -32,17 +34,26 @@ public class PaymentController extends HttpServlet {
         User user = (User) req.getSession().getAttribute("user");
         if (user == null) {
             resp.sendRedirect("/");
+            return;
         }
+
+        int cartId;
+        try {
+            cartId = Integer.parseInt(req.getParameter("cart"));
+        } catch (NumberFormatException e) {
+            Util.handleError(req, resp, HttpServletResponse.SC_BAD_REQUEST, Error.MALFORMED_CART_ID);
+            return;
+        }
+        CartDao cartDataStore = DaoController.getCartDao();
+        Cart cart = cartDataStore.find(cartId);
+
         String name = req.getParameter("name");
         String email = req.getParameter("e-mail");
         String phoneNumber = req.getParameter("phone-number");
         String billingAddress = req.getParameter("billing-address");
         String shippingAddress = req.getParameter("shipping-address");
-
         ShippingInfo shippingInfo = new ShippingInfo(name, email, phoneNumber, billingAddress, shippingAddress);
-        CartDao cartDataStore = DaoController.getCartDao();
-        int cartId = Integer.parseInt(req.getParameter("cart"));
-        Cart cart = cartDataStore.find(cartId);
+
         Order order = new Order(cart, shippingInfo);
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());

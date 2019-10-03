@@ -1,12 +1,10 @@
 package com.codecool.shop.dao.implementation.jdbc;
 
-import com.codecool.shop.dao.DaoController;
-import com.codecool.shop.dao.ProductCategoryDao;
-import com.codecool.shop.dao.ProductDao;
-import com.codecool.shop.dao.SupplierDao;
+import com.codecool.shop.dao.*;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
+import com.codecool.shop.util.Error;
 import lombok.Cleanup;
 
 import java.math.BigDecimal;
@@ -37,10 +35,10 @@ public class ProductDaoJDBC extends DaoJDBC implements ProductDao {
                 int id = rs.getInt("id");
                 product.setId(id);
             } else {
-                throw new RuntimeException("Product object received no id"); // TODO
+                throw new DataNotFoundException(Error.NO_PRODUCT_ID);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DataSourceException(Error.DATABASE_IS_UNREACHABLE, e);
         }
     }
 
@@ -59,10 +57,10 @@ public class ProductDaoJDBC extends DaoJDBC implements ProductDao {
                 return product;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DataSourceException(Error.DATABASE_IS_UNREACHABLE, e);
         }
 
-        return null;
+        throw new DataNotFoundException(Error.NO_SUCH_PRODUCT);
     }
 
     @Override
@@ -75,39 +73,31 @@ public class ProductDaoJDBC extends DaoJDBC implements ProductDao {
 
             stmt.execute(query);
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DataSourceException(Error.DATABASE_IS_UNREACHABLE, e);
         }
     }
 
     @Override
     public List<Product> getAll() {
         String query = "SELECT * FROM product;";
-        List<Product> result = new ArrayList<>();
 
         try {
-            result = createProductList(query);
-
+            return createProductList(query);
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DataSourceException(Error.DATABASE_IS_UNREACHABLE, e);
         }
-
-        return result;
     }
 
     @Override
     public List<Product> getBy(Supplier supplier) {
         int supplierId = supplier.getId();
         String query = "SELECT * FROM product WHERE supplier_id = " + supplierId + ";";
-        List<Product> result = new ArrayList<>();
 
         try {
-            result = createProductList(query);
-
+            return createProductList(query);
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DataSourceException(Error.DATABASE_IS_UNREACHABLE, e);
         }
-
-        return result;
     }
 
 
@@ -115,16 +105,12 @@ public class ProductDaoJDBC extends DaoJDBC implements ProductDao {
     public List<Product> getBy(ProductCategory productCategory) {
         int productCategoryId = productCategory.getId();
         String query = "SELECT * FROM product WHERE product_category_id = " + productCategoryId + ";";
-        List<Product> result = new ArrayList<>();
 
         try {
-            result = createProductList(query);
-
+            return createProductList(query);
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DataSourceException(Error.DATABASE_IS_UNREACHABLE, e);
         }
-
-        return result;
     }
 
     private Product createProduct(ResultSet rs) throws SQLException {

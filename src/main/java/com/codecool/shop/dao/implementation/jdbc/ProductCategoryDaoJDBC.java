@@ -1,7 +1,10 @@
 package com.codecool.shop.dao.implementation.jdbc;
 
+import com.codecool.shop.dao.DataNotFoundException;
+import com.codecool.shop.dao.DataSourceException;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.model.ProductCategory;
+import com.codecool.shop.util.Error;
 import lombok.Cleanup;
 
 import java.sql.*;
@@ -27,10 +30,10 @@ public class ProductCategoryDaoJDBC extends DaoJDBC implements ProductCategoryDa
                 int id = rs.getInt("id");
                 category.setId(id);
             } else {
-                throw new RuntimeException("Category object received no id"); // TODO
+                throw new DataNotFoundException(Error.NO_CATEGORY_ID);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DataSourceException(Error.DATABASE_IS_UNREACHABLE, e);
         }
     }
 
@@ -52,10 +55,10 @@ public class ProductCategoryDaoJDBC extends DaoJDBC implements ProductCategoryDa
                 return productCategory;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DataSourceException(Error.DATABASE_IS_UNREACHABLE, e);
         }
 
-        return null;
+        throw new DataNotFoundException(Error.NO_SUCH_CATEGORY);
     }
 
     @Override
@@ -68,7 +71,7 @@ public class ProductCategoryDaoJDBC extends DaoJDBC implements ProductCategoryDa
 
             stmt.execute(query);
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DataSourceException(Error.DATABASE_IS_UNREACHABLE, e);
         }
     }
 
@@ -92,7 +95,7 @@ public class ProductCategoryDaoJDBC extends DaoJDBC implements ProductCategoryDa
                 categories.add(productCategory);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DataSourceException(Error.DATABASE_IS_UNREACHABLE, e);
         }
 
         return categories;

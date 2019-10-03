@@ -1,11 +1,10 @@
 package com.codecool.shop.dao.implementation.jdbc;
 
-import com.codecool.shop.dao.DaoController;
-import com.codecool.shop.dao.LineItemDao;
-import com.codecool.shop.dao.ProductDao;
+import com.codecool.shop.dao.*;
 import com.codecool.shop.model.Cart;
 import com.codecool.shop.model.LineItem;
 import com.codecool.shop.model.Product;
+import com.codecool.shop.util.Error;
 import lombok.Cleanup;
 
 import java.sql.*;
@@ -32,10 +31,10 @@ public class LineItemDaoJDBC extends DaoJDBC implements LineItemDao {
                 int id = rs.getInt("id");
                 lineItem.setId(id);
             } else {
-                throw new RuntimeException("LineItem object received no id"); // TODO
+                throw new DataNotFoundException(Error.NO_LINE_ITEM_ID);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DataSourceException(Error.DATABASE_IS_UNREACHABLE, e);
         }
     }
 
@@ -50,7 +49,7 @@ public class LineItemDaoJDBC extends DaoJDBC implements LineItemDao {
 
             stmt.execute(query);
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DataSourceException(Error.DATABASE_IS_UNREACHABLE, e);
         }
     }
 
@@ -66,7 +65,7 @@ public class LineItemDaoJDBC extends DaoJDBC implements LineItemDao {
 
             stmt.execute(query);
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DataSourceException(Error.DATABASE_IS_UNREACHABLE, e);
         }
     }
 
@@ -91,10 +90,10 @@ public class LineItemDaoJDBC extends DaoJDBC implements LineItemDao {
                 return lineItem;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DataSourceException(Error.DATABASE_IS_UNREACHABLE, e);
         }
 
-        return null;
+        throw new DataNotFoundException(Error.NO_SUCH_LINE_ITEM);
     }
 
     @Override
@@ -120,7 +119,7 @@ public class LineItemDaoJDBC extends DaoJDBC implements LineItemDao {
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DataSourceException(Error.DATABASE_IS_UNREACHABLE, e);
         }
 
         return result;

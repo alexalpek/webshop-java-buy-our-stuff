@@ -1,5 +1,6 @@
 package com.codecool.shop.dao.implementation.mem;
 
+import com.codecool.shop.dao.DataNotFoundException;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
@@ -25,7 +26,7 @@ public class ProductDaoMem implements ProductDao {
                 .stream()
                 .filter(t -> t.getId() == id)
                 .findFirst()
-                .orElse(null);
+                .orElseThrow(() -> new DataNotFoundException("No such product"));
     }
 
     @Override
