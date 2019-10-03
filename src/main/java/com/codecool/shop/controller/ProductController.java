@@ -58,9 +58,9 @@ public class ProductController extends HttpServlet {
             }
             engine.process("product/index.html", context, resp.getWriter());
         } catch (DataNotFoundException e) {
-            Util.handleError(resp, HttpServletResponse.SC_BAD_REQUEST, "Wrong id");
+            Util.handleError(req, resp, HttpServletResponse.SC_BAD_REQUEST, "Wrong id");
         } catch (DataSourceException e) {
-            Util.handleError(resp, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
+            Util.handleError(req, resp, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
         }
     }
 
@@ -91,16 +91,16 @@ public class ProductController extends HttpServlet {
                 try {
                     cart.add(productDataStore.find(productId));
                 } catch (DataNotFoundException e) {
-                    Util.handleError(resp, HttpServletResponse.SC_BAD_REQUEST, e.getMessage());
+                    Util.handleError(req, resp, HttpServletResponse.SC_BAD_REQUEST, e.getMessage());
                     return;
                 } catch (DataSourceException e) {
-                    Util.handleError(resp, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
+                    Util.handleError(req, resp, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
                     return;
                 }
             }
             doGet(req, resp);
         } catch (NumberFormatException e) {
-            Util.handleError(resp, HttpServletResponse.SC_BAD_REQUEST, Error.MALFORMED_FILTER_ID);
+            Util.handleError(req, resp, HttpServletResponse.SC_BAD_REQUEST, Error.MALFORMED_FILTER_ID);
         }
     }
 }

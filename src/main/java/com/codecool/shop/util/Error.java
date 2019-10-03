@@ -19,6 +19,7 @@ public class Error {
 
     public static final String MALFORMED_FILTER_ID = "Malformed category or supplier id";
     public static final String MALFORMED_CART_ID = "Malformed cart id";
+    public static final String MALFORMED_STATUS_CODE = "Malformed status code";
 
     public static final String INVALID_CART_OPERATION = "Invalid cart operation";
 

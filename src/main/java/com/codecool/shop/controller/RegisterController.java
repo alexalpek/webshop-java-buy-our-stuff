@@ -40,7 +40,7 @@ public class RegisterController extends HttpServlet {
         try {
             isNameAvailable = userDao.isNameAvailable(username);
         } catch (DataSourceException e) {
-            Util.handleError(resp, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
+            Util.handleError(req, resp, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
             return;
         }
 

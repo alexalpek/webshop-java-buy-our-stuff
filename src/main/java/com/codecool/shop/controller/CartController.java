@@ -5,6 +5,7 @@ import com.codecool.shop.dao.DaoController;
 import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.DataSourceException;
 import com.codecool.shop.dao.LineItemDao;
+import com.codecool.shop.model.Cart;
 import com.codecool.shop.model.LineItem;
 import com.codecool.shop.model.User;
 import com.codecool.shop.util.Error;
@@ -31,12 +32,16 @@ public class CartController extends HttpServlet {
         WebContext context = new WebContext(req, resp, req.getServletContext());
 
         User user = (User) req.getSession().getAttribute("user");
-        if (user == null) {
-            resp.sendRedirect("/");
-        } else {
-            context.setVariable("cart", cartDataStore.find(user.getCartId()));
-            engine.process("product/cart.html", context, resp.getWriter());
+        if (user != null) {
+            Cart cart = cartDataStore.find(user.getCartId());
+            if (cart != null) {
+                context.setVariable("cart", cart);
+                engine.process("product/cart.html", context, resp.getWriter());
+                return;
+            }
         }
+
+        resp.sendRedirect("/");
     }
 
     @Override
@@ -61,11 +66,11 @@ public class CartController extends HttpServlet {
                     lineItemDao.remove(lineItem);
                     break;
                 default:
-                    Util.handleError(resp, HttpServletResponse.SC_BAD_REQUEST, Error.INVALID_CART_OPERATION);
+                    Util.handleError(req, resp, HttpServletResponse.SC_BAD_REQUEST, Error.INVALID_CART_OPERATION);
                     return;
             }
         } catch (DataSourceException e) {
-            Util.handleError(resp, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
+            Util.handleError(req, resp, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
             return;
         }
 

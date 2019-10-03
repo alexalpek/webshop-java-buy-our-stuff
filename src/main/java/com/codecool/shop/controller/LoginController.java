@@ -48,7 +48,7 @@ public class LoginController extends HttpServlet {
             loginError = true;
             doGet(req, resp);
         } catch (DataSourceException e) {
-            Util.handleError(resp, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
+            Util.handleError(req, resp, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
         }
     }
 }

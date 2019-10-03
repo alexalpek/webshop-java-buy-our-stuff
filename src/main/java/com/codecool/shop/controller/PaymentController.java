@@ -41,7 +41,7 @@ public class PaymentController extends HttpServlet {
         try {
             cartId = Integer.parseInt(req.getParameter("cart"));
         } catch (NumberFormatException e) {
-            Util.handleError(resp, HttpServletResponse.SC_BAD_REQUEST, Error.MALFORMED_CART_ID);
+            Util.handleError(req, resp, HttpServletResponse.SC_BAD_REQUEST, Error.MALFORMED_CART_ID);
             return;
         }
         CartDao cartDataStore = DaoController.getCartDao();

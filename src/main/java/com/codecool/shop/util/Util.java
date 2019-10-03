@@ -1,5 +1,6 @@
 package com.codecool.shop.util;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
@@ -15,11 +16,9 @@ public class Util {
         return false;
     }
 
-
-    public static void handleError(HttpServletResponse resp, int statusCode, final String message) throws IOException {
-        resp.setStatus(statusCode);
-        resp.getWriter().println("{\"error\": \"" + message + "\"}");
-        resp.setContentType("application/json");
-        resp.setCharacterEncoding("utf-8");
+    public static void handleError(HttpServletRequest req, HttpServletResponse resp, int statusCode, final String message) throws IOException {
+        req.getSession().setAttribute("errorMessage", message);
+        req.getSession().setAttribute("statusCode", statusCode);
+        resp.sendRedirect("/error");
     }
 }
