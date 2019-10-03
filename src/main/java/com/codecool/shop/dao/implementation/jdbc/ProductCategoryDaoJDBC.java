@@ -29,10 +29,10 @@ public class ProductCategoryDaoJDBC extends DaoJDBC implements ProductCategoryDa
                 int id = rs.getInt("id");
                 category.setId(id);
             } else {
-                throw new RuntimeException("Category object received no id"); // TODO
+                throw new DataNotFoundException("ProductCategory object received no id");
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DataSourceException("Database not reachable", e);
         }
     }
 
@@ -70,7 +70,7 @@ public class ProductCategoryDaoJDBC extends DaoJDBC implements ProductCategoryDa
 
             stmt.execute(query);
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DataSourceException("Database not reachable", e);
         }
     }
 
@@ -94,7 +94,7 @@ public class ProductCategoryDaoJDBC extends DaoJDBC implements ProductCategoryDa
                 categories.add(productCategory);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DataSourceException("Database not reachable", e);
         }
 
         return categories;
