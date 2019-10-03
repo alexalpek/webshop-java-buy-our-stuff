@@ -83,7 +83,12 @@ public class ProductController extends HttpServlet {
                 int cartId = user.getCartId();
 
                 Cart cart = cartDataStore.find(cartId);
-                cart.add(productDataStore.find(productId));
+                try {
+                    cart.add(productDataStore.find(productId));
+                } catch (DataNotFoundException e) {
+                    Util.handleError(resp, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
+                    return;
+                }
             }
             doGet(req, resp);
         } catch (NumberFormatException e) {
