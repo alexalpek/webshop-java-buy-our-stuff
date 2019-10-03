@@ -24,4 +24,6 @@ public class Error {
     public static final String INVALID_CART_OPERATION = "Invalid cart operation";
 
     public static final String CLASS_NOT_FOUND = "Class not found";
+
+    public static final String COULD_NOT_READ_FIELD = "Couldn't read field";
 }

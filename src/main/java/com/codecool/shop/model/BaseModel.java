@@ -1,5 +1,7 @@
 package com.codecool.shop.model;
 
+import com.codecool.shop.util.Error;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,7 +26,7 @@ public abstract class BaseModel {
                     sb.append(value).append(", ");
                 }
             } catch (IllegalAccessException e) {
-
+                throw new RuntimeException(Error.COULD_NOT_READ_FIELD, e);
             }
         }
         sb.setLength(sb.length() - 2);
