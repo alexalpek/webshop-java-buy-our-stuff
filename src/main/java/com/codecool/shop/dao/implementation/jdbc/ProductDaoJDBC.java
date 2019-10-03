@@ -4,6 +4,7 @@ import com.codecool.shop.dao.*;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
+import com.codecool.shop.util.Error;
 import lombok.Cleanup;
 
 import java.math.BigDecimal;
@@ -34,10 +35,10 @@ public class ProductDaoJDBC extends DaoJDBC implements ProductDao {
                 int id = rs.getInt("id");
                 product.setId(id);
             } else {
-                throw new DataNotFoundException("Product object received no id");
+                throw new DataNotFoundException(Error.NO_PRODUCT_ID);
             }
         } catch (SQLException e) {
-            throw new DataSourceException("Database not reachable", e);
+            throw new DataSourceException(Error.DATABASE_IS_UNREACHABLE, e);
         }
     }
 
@@ -56,10 +57,10 @@ public class ProductDaoJDBC extends DaoJDBC implements ProductDao {
                 return product;
             }
         } catch (SQLException e) {
-            throw new DataSourceException("Database not reachable", e);
+            throw new DataSourceException(Error.DATABASE_IS_UNREACHABLE, e);
         }
 
-        throw new DataNotFoundException("No such product");
+        throw new DataNotFoundException(Error.NO_SUCH_PRODUCT);
     }
 
     @Override
@@ -72,7 +73,7 @@ public class ProductDaoJDBC extends DaoJDBC implements ProductDao {
 
             stmt.execute(query);
         } catch (SQLException e) {
-            throw new DataSourceException("Database not reachable", e);
+            throw new DataSourceException(Error.DATABASE_IS_UNREACHABLE, e);
         }
     }
 
@@ -83,7 +84,7 @@ public class ProductDaoJDBC extends DaoJDBC implements ProductDao {
         try {
             return createProductList(query);
         } catch (SQLException e) {
-            throw new DataSourceException("Database not reachable", e);
+            throw new DataSourceException(Error.DATABASE_IS_UNREACHABLE, e);
         }
     }
 
@@ -95,7 +96,7 @@ public class ProductDaoJDBC extends DaoJDBC implements ProductDao {
         try {
             return createProductList(query);
         } catch (SQLException e) {
-            throw new DataSourceException("Database not reachable", e);
+            throw new DataSourceException(Error.DATABASE_IS_UNREACHABLE, e);
         }
     }
 
@@ -108,7 +109,7 @@ public class ProductDaoJDBC extends DaoJDBC implements ProductDao {
         try {
             return createProductList(query);
         } catch (SQLException e) {
-            throw new DataSourceException("Database not reachable", e);
+            throw new DataSourceException(Error.DATABASE_IS_UNREACHABLE, e);
         }
     }
 

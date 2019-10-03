@@ -4,6 +4,7 @@ import com.codecool.shop.dao.DataNotFoundException;
 import com.codecool.shop.dao.DataSourceException;
 import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.model.Supplier;
+import com.codecool.shop.util.Error;
 import lombok.Cleanup;
 
 import java.sql.*;
@@ -27,10 +28,10 @@ public class SupplierDaoJDBC extends DaoJDBC implements SupplierDao {
                 int id = rs.getInt("id");
                 supplier.setId(id);
             } else {
-                throw new DataNotFoundException("Supplier object received no id");
+                throw new DataNotFoundException(Error.NO_SUPPLIER_ID);
             }
         } catch (SQLException e) {
-            throw new DataSourceException("Database not reachable", e);
+            throw new DataSourceException(Error.DATABASE_IS_UNREACHABLE, e);
         }
     }
 
@@ -51,10 +52,10 @@ public class SupplierDaoJDBC extends DaoJDBC implements SupplierDao {
                 return supplier;
             }
         } catch (SQLException e) {
-            throw new DataSourceException("Database not reachable", e);
+            throw new DataSourceException(Error.DATABASE_IS_UNREACHABLE, e);
         }
 
-        throw new DataNotFoundException("No such supplier");
+        throw new DataNotFoundException(Error.NO_SUCH_SUPPLIER);
     }
 
     @Override
@@ -67,7 +68,7 @@ public class SupplierDaoJDBC extends DaoJDBC implements SupplierDao {
 
             stmt.execute(query);
         } catch (SQLException e) {
-            throw new DataSourceException("Database not reachable", e);
+            throw new DataSourceException(Error.DATABASE_IS_UNREACHABLE, e);
         }
     }
 
@@ -90,7 +91,7 @@ public class SupplierDaoJDBC extends DaoJDBC implements SupplierDao {
                 suppliers.add(supplier);
             }
         } catch (SQLException e) {
-            throw new DataSourceException("Database not reachable", e);
+            throw new DataSourceException(Error.DATABASE_IS_UNREACHABLE, e);
         }
 
         return suppliers;

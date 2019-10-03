@@ -3,6 +3,7 @@ package com.codecool.shop.dao.implementation.jdbc;
 import com.codecool.shop.dao.*;
 import com.codecool.shop.model.Cart;
 import com.codecool.shop.model.User;
+import com.codecool.shop.util.Error;
 import lombok.Cleanup;
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -32,7 +33,7 @@ public class UserDaoJDBC extends DaoJDBC implements UserDao {
             stmt.setInt(3, cart.getId());
             stmt.execute();
         } catch (SQLException e) {
-            throw new DataSourceException("Database not reachable", e);
+            throw new DataSourceException(Error.DATABASE_IS_UNREACHABLE, e);
         }
     }
 
@@ -52,10 +53,10 @@ public class UserDaoJDBC extends DaoJDBC implements UserDao {
                 return user;
             }
         } catch (SQLException e) {
-            throw new DataSourceException("Database not reachable", e);
+            throw new DataSourceException(Error.DATABASE_IS_UNREACHABLE, e);
         }
 
-        throw new DataNotFoundException("No such user");
+        throw new DataNotFoundException(Error.NO_SUCH_USER);
     }
 
     @Override
@@ -72,7 +73,7 @@ public class UserDaoJDBC extends DaoJDBC implements UserDao {
                 return false;
             }
         } catch (SQLException e) {
-            throw new DataSourceException("Database not reachable", e);
+            throw new DataSourceException(Error.DATABASE_IS_UNREACHABLE, e);
         }
         return true;
     }

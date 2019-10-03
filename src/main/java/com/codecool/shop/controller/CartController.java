@@ -7,6 +7,7 @@ import com.codecool.shop.dao.DataSourceException;
 import com.codecool.shop.dao.LineItemDao;
 import com.codecool.shop.model.LineItem;
 import com.codecool.shop.model.User;
+import com.codecool.shop.util.Error;
 import com.codecool.shop.util.Util;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
@@ -60,7 +61,7 @@ public class CartController extends HttpServlet {
                     lineItemDao.remove(lineItem);
                     break;
                 default:
-                    Util.handleError(resp, HttpServletResponse.SC_BAD_REQUEST, "Invalid cart operation");
+                    Util.handleError(resp, HttpServletResponse.SC_BAD_REQUEST, Error.INVALID_CART_OPERATION);
                     return;
             }
         } catch (DataSourceException e) {

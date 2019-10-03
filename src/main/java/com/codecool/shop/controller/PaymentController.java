@@ -7,6 +7,7 @@ import com.codecool.shop.model.Cart;
 import com.codecool.shop.model.Order;
 import com.codecool.shop.model.ShippingInfo;
 import com.codecool.shop.model.User;
+import com.codecool.shop.util.Error;
 import com.codecool.shop.util.Util;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
@@ -40,7 +41,7 @@ public class PaymentController extends HttpServlet {
         try {
             cartId = Integer.parseInt(req.getParameter("cart"));
         } catch (NumberFormatException e) {
-            Util.handleError(resp, HttpServletResponse.SC_BAD_REQUEST, "Malformed cart id.");
+            Util.handleError(resp, HttpServletResponse.SC_BAD_REQUEST, Error.MALFORMED_CART_ID);
             return;
         }
         CartDao cartDataStore = DaoController.getCartDao();

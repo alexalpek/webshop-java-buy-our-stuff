@@ -4,6 +4,7 @@ import com.codecool.shop.dao.CartDao;
 import com.codecool.shop.dao.DataNotFoundException;
 import com.codecool.shop.dao.DataSourceException;
 import com.codecool.shop.model.Cart;
+import com.codecool.shop.util.Error;
 import lombok.Cleanup;
 
 import java.sql.*;
@@ -26,10 +27,10 @@ public class CartDaoJDBC extends DaoJDBC implements CartDao {
                 int id = rs.getInt("id");
                 cart.setId(id);
             } else {
-                throw new DataNotFoundException("Cart object received no id");
+                throw new DataNotFoundException(Error.NO_CART_ID);
             }
         } catch (SQLException e) {
-            throw new DataSourceException("Database not reachable", e);
+            throw new DataSourceException(Error.DATABASE_IS_UNREACHABLE, e);
         }
     }
 
@@ -48,10 +49,10 @@ public class CartDaoJDBC extends DaoJDBC implements CartDao {
                 return cart;
             }
         } catch (SQLException e) {
-            throw new DataSourceException("Database not reachable", e);
+            throw new DataSourceException(Error.DATABASE_IS_UNREACHABLE, e);
         }
 
-        throw new DataNotFoundException("No such supplier");
+        throw new DataNotFoundException(Error.NO_SUCH_CART);
     }
 
     @Override
@@ -64,7 +65,7 @@ public class CartDaoJDBC extends DaoJDBC implements CartDao {
 
             stmt.execute(query);
         } catch (SQLException e) {
-            throw new DataSourceException("Database not reachable", e);
+            throw new DataSourceException(Error.DATABASE_IS_UNREACHABLE, e);
         }
     }
 
@@ -85,7 +86,7 @@ public class CartDaoJDBC extends DaoJDBC implements CartDao {
                 cartList.add(cart);
             }
         } catch (SQLException e) {
-            throw new DataSourceException("Database not reachable", e);
+            throw new DataSourceException(Error.DATABASE_IS_UNREACHABLE, e);
         }
 
         return cartList;

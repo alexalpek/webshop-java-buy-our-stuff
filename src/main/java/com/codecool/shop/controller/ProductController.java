@@ -6,6 +6,7 @@ import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
 import com.codecool.shop.model.User;
+import com.codecool.shop.util.Error;
 import com.codecool.shop.util.Util;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
@@ -99,7 +100,7 @@ public class ProductController extends HttpServlet {
             }
             doGet(req, resp);
         } catch (NumberFormatException e) {
-            Util.handleError(resp, HttpServletResponse.SC_BAD_REQUEST, "Malformed category or supplier id.");
+            Util.handleError(resp, HttpServletResponse.SC_BAD_REQUEST, Error.MALFORMED_FILTER_ID);
         }
     }
 }
