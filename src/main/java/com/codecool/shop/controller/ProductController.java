@@ -80,6 +80,10 @@ public class ProductController extends HttpServlet {
 
                 int productId = Integer.parseInt(req.getParameter("product"));
                 User user = (User) req.getSession().getAttribute("user");
+                if (user == null) {
+                    resp.sendRedirect("/");
+                    return;
+                }
                 int cartId = user.getCartId();
 
                 Cart cart = cartDataStore.find(cartId);
