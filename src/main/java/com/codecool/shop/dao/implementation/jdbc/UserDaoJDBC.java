@@ -32,7 +32,7 @@ public class UserDaoJDBC extends DaoJDBC implements UserDao {
             stmt.setInt(3, cart.getId());
             stmt.execute();
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DataSourceException("Database not reachable", e);
         }
     }
 

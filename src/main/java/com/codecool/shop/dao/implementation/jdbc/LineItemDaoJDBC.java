@@ -89,10 +89,10 @@ public class LineItemDaoJDBC extends DaoJDBC implements LineItemDao {
                 return lineItem;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DataSourceException("Database not reachable", e);
         }
 
-        return null;
+        throw new DataNotFoundException("No such line-item");
     }
 
     @Override
@@ -118,7 +118,7 @@ public class LineItemDaoJDBC extends DaoJDBC implements LineItemDao {
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DataSourceException("Database not reachable", e);
         }
 
         return result;

@@ -2,6 +2,7 @@ package com.codecool.shop.dao.implementation.mem;
 
 import com.codecool.shop.dao.CartDao;
 import com.codecool.shop.dao.DaoController;
+import com.codecool.shop.dao.DataNotFoundException;
 import com.codecool.shop.dao.UserDao;
 import com.codecool.shop.model.Cart;
 import com.codecool.shop.model.User;
@@ -36,7 +37,7 @@ public class UserDaoMem implements UserDao {
                 .filter(user -> user.getName().equals(name)
                         && BCrypt.checkpw(password, users.get(user)))
                 .findFirst()
-                .orElse(null);
+                .orElseThrow(() -> new DataNotFoundException("No such user"));
     }
 
     @Override

@@ -42,10 +42,10 @@ public class ProductController extends HttpServlet {
                 .map(id -> cartDataStore.find(id).size())
                 .orElse(0);
         context.setVariable("cartSize", cartSize);
-        context.setVariable("categories", productCategoryDataStore.getAll());
-        context.setVariable("suppliers", supplierDataStore.getAll());
 
         try {
+            context.setVariable("categories", productCategoryDataStore.getAll());
+            context.setVariable("suppliers", supplierDataStore.getAll());
             if (filterByCategory) {
                 ProductCategory category = productCategoryDataStore.find(id);
                 context.setVariable("filter", category);
