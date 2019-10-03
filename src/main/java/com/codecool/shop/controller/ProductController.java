@@ -6,6 +6,7 @@ import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
 import com.codecool.shop.model.User;
+import com.codecool.shop.util.Util;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -56,9 +57,9 @@ public class ProductController extends HttpServlet {
             }
             engine.process("product/index.html", context, resp.getWriter());
         } catch (DataNotFoundException e) {
-            handleError(resp, HttpServletResponse.SC_BAD_REQUEST, "Wrong id");
+            Util.handleError(resp, HttpServletResponse.SC_BAD_REQUEST, "Wrong id");
         } catch (DataSourceException e) {
-            handleError(resp, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
+            Util.handleError(resp, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
         }
     }
 
@@ -86,14 +87,7 @@ public class ProductController extends HttpServlet {
             }
             doGet(req, resp);
         } catch (NumberFormatException e) {
-            handleError(resp, HttpServletResponse.SC_BAD_REQUEST, "Malformed category or supplier id.");
+            Util.handleError(resp, HttpServletResponse.SC_BAD_REQUEST, "Malformed category or supplier id.");
         }
-    }
-
-    private void handleError(HttpServletResponse resp, int statusCode, final String message) throws IOException {
-        resp.setStatus(statusCode);
-        resp.getWriter().println("{\"error\": \"" + message + "\"}");
-        resp.setContentType("application/json");
-        resp.setCharacterEncoding("utf-8");
     }
 }
