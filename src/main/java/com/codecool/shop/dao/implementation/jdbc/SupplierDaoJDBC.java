@@ -1,5 +1,7 @@
 package com.codecool.shop.dao.implementation.jdbc;
 
+import com.codecool.shop.dao.DataNotFoundException;
+import com.codecool.shop.dao.DataSourceException;
 import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.model.Supplier;
 import lombok.Cleanup;
@@ -25,10 +27,10 @@ public class SupplierDaoJDBC extends DaoJDBC implements SupplierDao {
                 int id = rs.getInt("id");
                 supplier.setId(id);
             } else {
-                throw new RuntimeException("Supplier object received no id"); // TODO
+                throw new DataNotFoundException("Supplier object received no id");
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DataSourceException("Database not reachable", e);
         }
     }
 
@@ -49,10 +51,10 @@ public class SupplierDaoJDBC extends DaoJDBC implements SupplierDao {
                 return supplier;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DataSourceException("Database not reachable", e);
         }
 
-        return null;
+        throw new DataNotFoundException("No such supplier");
     }
 
     @Override
@@ -65,7 +67,7 @@ public class SupplierDaoJDBC extends DaoJDBC implements SupplierDao {
 
             stmt.execute(query);
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DataSourceException("Database not reachable", e);
         }
     }
 
@@ -88,7 +90,7 @@ public class SupplierDaoJDBC extends DaoJDBC implements SupplierDao {
                 suppliers.add(supplier);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DataSourceException("Database not reachable", e);
         }
 
         return suppliers;

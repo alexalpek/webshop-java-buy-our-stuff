@@ -29,19 +29,17 @@ class SupplierDaoTest extends DaoTest {
     @Test
     void testFind_invalidId() {
         SupplierDao supplierDao = DaoController.getSupplierDao();
-        Supplier result = supplierDao.find(-1);
-        Assertions.assertNull(result);
+        Assertions.assertThrows(DataNotFoundException.class, () -> supplierDao.find(-1));
     }
 
     @Test
     void testRemove() {
         int id = 1;
         SupplierDao supplierDao = DaoController.getSupplierDao();
-        Supplier before = supplierDao.find(id);
+        Supplier supplier = supplierDao.find(id);
         supplierDao.remove(id);
-        Supplier after = supplierDao.find(id);
-        Assertions.assertNotNull(before);
-        Assertions.assertNull(after);
+        Assertions.assertNotNull(supplier);
+        Assertions.assertThrows(DataNotFoundException.class, () -> supplierDao.find(id));
     }
 
     @Test
