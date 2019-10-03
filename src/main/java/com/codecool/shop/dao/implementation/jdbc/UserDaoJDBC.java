@@ -72,7 +72,7 @@ public class UserDaoJDBC extends DaoJDBC implements UserDao {
                 return false;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DataSourceException("Database not reachable", e);
         }
         return true;
     }
