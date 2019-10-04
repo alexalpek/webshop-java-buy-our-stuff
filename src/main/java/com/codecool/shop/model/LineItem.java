@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter
-public class LineItem {
+public class LineItem extends BaseModel {
 
     @Setter
     private int quantity;
@@ -12,10 +12,10 @@ public class LineItem {
     private Product product;
     private int cartId;
 
-    public LineItem(Product product, int quantity, Cart cart) {
+    public LineItem(Product product, int cartId, int quantity) {
         this.product = product;
+        this.cartId = cartId;
         this.quantity = quantity;
-        this.cartId = cart.getId();
     }
 
     public String toString() {

@@ -1,13 +1,10 @@
 package com.codecool.shop.dao;
 
-import com.codecool.shop.dao.implementation.jdbc.SupplierDaoJDBC;
 import com.codecool.shop.model.Supplier;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class SupplierDaoTest extends DaoTest {
 
@@ -29,24 +26,22 @@ class SupplierDaoTest extends DaoTest {
     @Test
     void testFind_invalidId() {
         SupplierDao supplierDao = DaoController.getSupplierDao();
-        Supplier result = supplierDao.find(-1);
-        Assertions.assertNull(result);
+        Assertions.assertThrows(DataNotFoundException.class, () -> supplierDao.find(-1));
     }
 
     @Test
     void testRemove() {
         int id = 1;
         SupplierDao supplierDao = DaoController.getSupplierDao();
-        Supplier before = supplierDao.find(id);
+        Supplier supplier = supplierDao.find(id);
         supplierDao.remove(id);
-        Supplier after = supplierDao.find(id);
-        Assertions.assertNotNull(before);
-        Assertions.assertNull(after);
+        Assertions.assertNotNull(supplier);
+        Assertions.assertThrows(DataNotFoundException.class, () -> supplierDao.find(id));
     }
 
     @Test
     void testGetAll() {
-        int supplierCount = 2;
+        int supplierCount = 4;
         SupplierDao supplierDao = DaoController.getSupplierDao();
         List<Supplier> suppliers = supplierDao.getAll();
         Assertions.assertEquals(supplierCount, suppliers.size());

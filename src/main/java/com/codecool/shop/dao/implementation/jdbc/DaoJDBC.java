@@ -1,6 +1,7 @@
 package com.codecool.shop.dao.implementation.jdbc;
 
 import com.codecool.shop.util.DatabaseHelper;
+import com.codecool.shop.util.Error;
 
 import java.sql.*;
 import java.util.Map;
@@ -18,7 +19,7 @@ public abstract class DaoJDBC {
             DATABASE = credentials.get("url") + "/" + credentials.get("database");
             PASSWORD = credentials.get("password");
         } catch (ClassNotFoundException e) {
-            throw new RuntimeException("Class not found");
+            throw new RuntimeException(Error.CLASS_NOT_FOUND);
         }
     }
 

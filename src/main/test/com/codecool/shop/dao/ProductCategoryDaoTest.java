@@ -6,8 +6,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class ProductCategoryDaoTest extends DaoTest {
 
     @Test
@@ -29,24 +27,22 @@ class ProductCategoryDaoTest extends DaoTest {
     @Test
     void testFind_invalidId() {
         ProductCategoryDao productCategoryDao = DaoController.getProductCategoryDao();
-        ProductCategory result = productCategoryDao.find(-1);
-        Assertions.assertNull(result);
+        Assertions.assertThrows(DataNotFoundException.class, () -> productCategoryDao.find(-1));
     }
 
     @Test
     void testRemove() {
         int id = 1;
         ProductCategoryDao productCategoryDao = DaoController.getProductCategoryDao();
-        ProductCategory before = productCategoryDao.find(id);
+        ProductCategory productCategory = productCategoryDao.find(id);
         productCategoryDao.remove(id);
-        ProductCategory after = productCategoryDao.find(id);
-        Assertions.assertNotNull(before);
-        Assertions.assertNull(after);
+        Assertions.assertNotNull(productCategory);
+        Assertions.assertThrows(DataNotFoundException.class, () -> productCategoryDao.find(id));
     }
 
     @Test
     void testGetAll() {
-        int productCategoryCount = 1;
+        int productCategoryCount = 3;
         ProductCategoryDao productCategoryDao = DaoController.getProductCategoryDao();
         List<ProductCategory> productCategories = productCategoryDao.getAll();
         Assertions.assertEquals(productCategoryCount, productCategories.size());

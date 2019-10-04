@@ -115,3 +115,75 @@ h2, #sum-div {
 .jumbotron h1 {
     color: #fff !important;
 }
+
+.form-field{
+    padding: 15px;
+}
+
+.back-to-home {
+    float: left !important;
+    text-decoration: none !important;
+    color: #8d8d8d !important;
+}
+
+.logged-in-name {
+    padding-right: 15px;
+}
+
+.error-message{
+    color: red;
+}
+
+.cart-actions {
+    width: 15%;
+}
+
+.cart-actions form {
+    display: inline-block;
+}
+
+.cart-actions form button  {
+    background: none;
+    border: none;
+}
+.cart-actions form button:focus {
+    outline: none;
+}
+
+.center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+#error-container {
+    text-align: center;
+}
+
+#error-container h4 {
+    font-size: 145%;
+    font-weight: bold;
+}
+
+#error-container p {
+    font-size: 125%;
+}
+
+.main-page-error {
+    color: #a94442 !important;
+    text-decoration: underline !important;
+    text-decoration-color: #a94442 ;
+}
+
+#error-container .error-go-back {
+    font-size: 115%;
+}
+
+.jumbotron.text-center.error-jumbotron {
+    background-color: #e0a29d !important;
+    border-color: #ebccd1 !important;
+    margin-bottom: 10%; /* error potential? */
+    border-radius: 4px
+}

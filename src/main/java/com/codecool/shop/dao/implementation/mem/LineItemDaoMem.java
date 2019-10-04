@@ -1,5 +1,6 @@
 package com.codecool.shop.dao.implementation.mem;
 
+import com.codecool.shop.dao.DataNotFoundException;
 import com.codecool.shop.dao.LineItemDao;
 import com.codecool.shop.model.Cart;
 import com.codecool.shop.model.LineItem;
@@ -27,12 +28,21 @@ public class LineItemDaoMem implements LineItemDao {
         data
                 .stream()
                 .filter(
-                        item -> item.getProduct() == lineItem.getProduct()
+                        item -> item.getId() == lineItem.getId()
                 )
                 .findFirst()
                 .ifPresent(
                         item -> item.setQuantity(quantity)
                 );
+    }
+
+    @Override
+    public LineItem find(int id) {
+        return data
+                .stream()
+                .filter(item -> item.getId() == id)
+                .findFirst()
+                .orElseThrow(() -> new DataNotFoundException("No such line-item"));
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.codecool.shop.dao.implementation.mem;
 
 import com.codecool.shop.dao.CartDao;
+import com.codecool.shop.dao.DataNotFoundException;
 import com.codecool.shop.model.Cart;
 
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ public class CartDaoMem implements CartDao {
                 .stream()
                 .filter(t -> t.getId() == id)
                 .findFirst()
-                .orElse(null);
+                .orElseThrow(() -> new DataNotFoundException("No such cart"));
     }
 
     @Override

@@ -33,6 +33,7 @@
                     <th>Quantity</th>
                     <th>Unit price</th>
                     <th>Total price</th>
+                    <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody class="table table-bordered" th:each="item : ${cart.items}">
@@ -41,16 +42,35 @@
                     <td th:text="${item.quantity}">Quantity</td>
                     <td th:text="${price} + ${item.product.defaultCurrency.symbol}">Unit price</td>
                     <td th:text="${price} * ${item.quantity} + ${item.product.defaultCurrency.symbol}">Total price</td>
+                    <td class="cart-actions">
+                        <form method="post">
+                            <input type="hidden" name="line-item-id" th:value="${item.id}">
+                            <button type="submit" name="edit" value="increase">
+                                <i class="glyphicon glyphicon-plus"></i>
+                            </button>
+                        </form>
+                        <form method="post">
+                            <input type="hidden" name="line-item-id" th:value="${item.id}">
+                            <button type="submit" name="edit" value="decrease">
+                                <i class="glyphicon glyphicon-minus"></i>
+                            </button>
+                        </form>
+                        <form method="post">
+                            <input type="hidden" name="line-item-id" th:value="${item.id}">
+                            <button type="submit" name="edit" value="clear">
+                                <i class="glyphicon glyphicon-trash"></i>
+                            </button>
+                        </form>
+                    </td>
                 </tr>
                 </tbody>
             </table>
 
             <div id="sum-div">
-                <h5 th:text="'Total price: ' + ${cart.getTotalPrice(2)} + ${cart.currency.symbol}">Total price</h5>
+                <h4 th:text="'Total price: ' + ${cart.getTotalPrice(2)} + ${cart.currency.symbol}">Total price</h4>
             </div>
 
-            <form action="/checkout" method="get">
-                <input type="hidden" name="cart" th:value="${cart.id}">
+            <form action="/checkout" method="post">
                 <input class="btn btn-success" type="submit" value="Checkout">
             </form>
         </div>

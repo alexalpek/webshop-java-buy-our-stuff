@@ -1,5 +1,6 @@
 package com.codecool.shop.dao.implementation.mem;
 
+import com.codecool.shop.dao.DataNotFoundException;
 import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.model.Supplier;
 
@@ -22,7 +23,7 @@ public class SupplierDaoMem implements SupplierDao {
                 .stream()
                 .filter(t -> t.getId() == id)
                 .findFirst()
-                .orElse(null);
+                .orElseThrow(() -> new DataNotFoundException("No such supplier"));
     }
 
     @Override

@@ -6,16 +6,25 @@
 </head>
 
 <body>
-<div class="container">
+<div class="jumbotron text-center">
+    <h1>Codecool Shop</h1>
+</div>
+
+<div class="container center">
     <div class="card text-center mt-5">
         <div class="card-header">
-            User story for next week.
+            Choose your payment method:
         </div>
         <div class="card-body">
-            <h5 class="card-title">Your order has been sent. You can pay for it once we have implemented it.</h5>
+            <div id="paypal-button-container">
+
+            </div>
+            <script>
+                paypal.Buttons().render('#paypal-button-container');
+            </script>
         </div>
         <div class="card-footer text-muted">
-            Sorry :(
+            <a id="link-back-to-main-page" class="back-to-home" href="/"> &lt;&lt; Back to home </a>
         </div>
     </div>
 </div>
