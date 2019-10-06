@@ -22,7 +22,10 @@ INSERT INTO supplier
 VALUES (2, 'Lenovo', 'Computers');
 INSERT INTO supplier
 VALUES (3, 'Dell', 'Computers');
-SELECT pg_catalog.setval('supplier_id_seq', 3, true);
+INSERT INTO supplier
+VALUES (4, 'Apple',
+        'Apple Inc. is an American multinational technology company that designs, develops, and sells consumer electronics, computer software, and online services.');
+SELECT pg_catalog.setval('supplier_id_seq', 4, true);
 
 INSERT INTO product_category
 VALUES (1, 'Tablet', 'Hardware',
@@ -30,7 +33,10 @@ VALUES (1, 'Tablet', 'Hardware',
 INSERT INTO product_category
 VALUES (2, 'Laptop', 'Hardware',
         'A laptop computer, commonly shortened to laptop, or called a notebook computer, is a small, portable personal computer typically having a thin LCD or LED computer screen display.');
-SELECT pg_catalog.setval('product_category_id_seq', 2, true);
+INSERT INTO product_category
+VALUES (3, 'Smartphone', 'Hardware',
+        'Smartphone is a mobile phone that performs many of the functions of a computer, typically having a touchscreen interface, Internet access, and an operating system capable of running downloaded apps.');
+SELECT pg_catalog.setval('product_category_id_seq', 3, true);
 
 INSERT INTO product
 VALUES (1, 'Amazon Fire', 1, 1, 49.99, 'USD',
@@ -44,4 +50,6 @@ VALUES (3, 'Amazon Fire HD 8', 1, 1, 89.99, 'USD',
 INSERT INTO product
 VALUES (4, 'Dell ChromeBook 11', 3, 2, 92.86, 'USD',
         '11-inch ChromeBook laptop built to roll with the punches of family life. Featuring the speed, simplicity and security of Chrome in a portable design.');
-SELECT pg_catalog.setval('product_id_seq', 4, true);
+INSERT INTO product
+VALUES (5, 'iPhone 11', 4, 3, 699.00, 'USD', 'iPhone 11 is Apple''s latest lower cost smartphone for 2019.');
+SELECT pg_catalog.setval('product_id_seq', 5, true);

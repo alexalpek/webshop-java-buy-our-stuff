@@ -6,8 +6,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class ProductCategoryDaoTest extends DaoTest {
 
     @Test
@@ -44,7 +42,7 @@ class ProductCategoryDaoTest extends DaoTest {
 
     @Test
     void testGetAll() {
-        int productCategoryCount = 2;
+        int productCategoryCount = 3;
         ProductCategoryDao productCategoryDao = DaoController.getProductCategoryDao();
         List<ProductCategory> productCategories = productCategoryDao.getAll();
         Assertions.assertEquals(productCategoryCount, productCategories.size());

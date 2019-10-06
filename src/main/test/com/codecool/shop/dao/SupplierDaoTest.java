@@ -1,13 +1,10 @@
 package com.codecool.shop.dao;
 
-import com.codecool.shop.dao.implementation.jdbc.SupplierDaoJDBC;
 import com.codecool.shop.model.Supplier;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class SupplierDaoTest extends DaoTest {
 
@@ -44,7 +41,7 @@ class SupplierDaoTest extends DaoTest {
 
     @Test
     void testGetAll() {
-        int supplierCount = 3;
+        int supplierCount = 4;
         SupplierDao supplierDao = DaoController.getSupplierDao();
         List<Supplier> suppliers = supplierDao.getAll();
         Assertions.assertEquals(supplierCount, suppliers.size());
