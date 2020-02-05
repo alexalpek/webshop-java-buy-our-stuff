@@ -1,6 +1,6 @@
 # Codecool Online Shop
 
-Java SE: Web Project skeleton
+Java SE: Simple Webshop
 
 # Install
 
